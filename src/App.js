@@ -1,10 +1,12 @@
 import "./App.css";
+import Head from "./components/Head";
+import Body from "./components/Body";
 
 function App() {
   return (
     <div className="App">
-      <h1>Welcome from Macbook</h1>
-      <h1 className="bg-slate-300">Regards, Nikhil Rawal</h1>
+      <Head />
+      <Body />
     </div>
   );
 }
