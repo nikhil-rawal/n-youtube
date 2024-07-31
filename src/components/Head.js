@@ -5,12 +5,12 @@ const Head = () => {
     <div className="grid grid-flow-col p-2 m-2">
       <div className="flex col-span-2 justify-start">
         <img
-          className="h-8 mx-2 cursor-pointer"
+          className="h-8 mx-3 cursor-pointer hover:bg-gray-100 hover:rounded-full"
           alt="menu"
           src="https://cdn.iconscout.com/icon/free/png-256/free-hamburger-menu-462145.png?f=webp&w=256"
         />
         <img
-          className="h-8 mx-2 cursor-pointer"
+          className="h-8 mx-5 cursor-pointer"
           alt="youtube-logo"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGJrpSqrv7Va8wkAJCoRTsHWDJyXJEe_ypDw&s"
         />
@@ -31,26 +31,36 @@ const Head = () => {
           </button>
         </div>
         <img
-          className="h-7 mx-2 cursor-pointer"
+          className="h-7 mx-5 cursor-pointer"
           alt="search-using-voice"
           src="https://www.svgrepo.com/show/44666/voice-recorder.svg"
         />
       </div>
       <div className="flex col-span-2 justify-end">
         <img
-          className="h-8 mx-3 cursor-pointer"
+          className="h-8 mx-4 cursor-pointer"
           alt="create-video"
           src="https://static.thenounproject.com/png/3750242-200.png"
         />
         <img
-          className="h-8 mx-3 cursor-pointer"
+          className="h-8 mx-4 cursor-pointer"
           alt="notifications-icon"
           src="https://static.vecteezy.com/system/resources/previews/015/934/666/original/bell-icon-simple-element-symbol-for-template-design-can-be-used-for-website-and-mobile-application-vector.jpg"
         />
         <img
-          className="h-8 mx-3 cursor-pointer"
+          className="h-8 mx-4 cursor-pointer"
           alt="user-icon"
           src="https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+        />
+        <img
+          className="h-8 mx-4 cursor-pointer"
+          alt="night-mode"
+          src="https://cdn4.iconfinder.com/data/icons/remixicon-weather/24/moon-clear-line-1024.png"
+        />
+        <img
+          className="h-8 mx-4 cursor-pointer"
+          alt="day-mode"
+          src="https://cdn3.iconfinder.com/data/icons/weather-free-2/32/Weather_Free_Outline_day-weather-sun-1024.png"
         />
       </div>
     </div>
