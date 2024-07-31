@@ -1,8 +1,14 @@
 import React from "react";
 import ImageComp from "../utils/ImageComp";
+import { useDispatch } from "react-redux";
+import { toggleMenu } from "../utils/appSlice";
 
 const Head = () => {
+  const dispatch = useDispatch();
   const hoverCSS = "hover:bg-gray-200 hover:rounded-full";
+  const toggleMenuHandler = () => {
+    dispatch(toggleMenu());
+  };
   return (
     <div className="grid grid-flow-col p-2 m-2">
       <div className="flex col-span-2 justify-start">
@@ -12,6 +18,7 @@ const Head = () => {
           srcname={
             "https://cdn.iconscout.com/icon/free/png-256/free-hamburger-menu-462145.png?f=webp&w=256"
           }
+          onClick={() => toggleMenuHandler()}
         />
         <ImageComp
           classname={`h-8 mx-5 cursor-pointer`}
