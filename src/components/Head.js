@@ -5,20 +5,18 @@ import { toggleMenu } from "../utils/appSlice";
 
 const Head = () => {
   const dispatch = useDispatch();
-  const hoverCSS = "hover:bg-gray-200 hover:rounded-full";
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
+  const hoverCSS = "hover:bg-gray-200 hover:rounded-full";
   return (
     <div className="grid grid-flow-col p-2 m-2">
       <div className="flex col-span-2 justify-start">
         <ImageComp
-          classname={`h-9 mx-3 cursor-pointer ${hoverCSS}`}
-          altname={"menu"}
-          srcname={
-            "https://cdn.iconscout.com/icon/free/png-256/free-hamburger-menu-462145.png?f=webp&w=256"
-          }
-          onClick={() => toggleMenuHandler()}
+          onclick={() => toggleMenuHandler()}
+          classname={`h-9 mx-4 cursor-pointer ${hoverCSS}`}
+          altname={`menu`}
+          srcname={`https://cdn.iconscout.com/icon/free/png-256/free-hamburger-menu-462145.png?f=webp&w=256`}
         />
         <ImageComp
           classname={`h-8 mx-5 cursor-pointer`}
