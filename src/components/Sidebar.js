@@ -1,7 +1,6 @@
 import React from "react";
 import ImageComp from "../utils/ImageComp";
 import { useSelector } from "react-redux";
-import { isMenuOpen } from "../utils/appSlice";
 
 const Sidebar = () => {
   const isMenuOpen = useSelector((state) => state.app.isMenuOpen);
