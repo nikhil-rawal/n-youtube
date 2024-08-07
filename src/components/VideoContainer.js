@@ -15,8 +15,6 @@ const VideoContainer = () => {
     setAllVideos(json.items);
   };
 
-  allVideos.length > 1 && allVideos.map((item) => console.log(item));
-
   return (
     <div className="flex flex-wrap m-2 p-2">
       {allVideos.length > 1 &&

@@ -2,6 +2,7 @@ import React from "react";
 import ImageComp from "../utils/ImageComp";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { Link } from "react-router-dom";
 
 const Head = () => {
   const dispatch = useDispatch();
@@ -18,13 +19,15 @@ const Head = () => {
           altSource={`menu`}
           srcSource={`https://cdn.iconscout.com/icon/free/png-256/free-hamburger-menu-462145.png?f=webp&w=256`}
         />
-        <ImageComp
-          classNameSource={`h-8 mx-5 cursor-pointer`}
-          altSource={"youtube-logo"}
-          srcSource={
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGJrpSqrv7Va8wkAJCoRTsHWDJyXJEe_ypDw&s"
-          }
-        />
+        <Link to="/">
+          <ImageComp
+            classNameSource={`h-8 mx-5 cursor-pointer`}
+            altSource={"youtube-logo"}
+            srcSource={
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGJrpSqrv7Va8wkAJCoRTsHWDJyXJEe_ypDw&s"
+            }
+          />
+        </Link>
       </div>
       <div className="flex col-span-8 justify-center ">
         <div className="flex">

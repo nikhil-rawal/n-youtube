@@ -1,24 +1,27 @@
 import React from "react";
 import ImageComp from "../utils/ImageComp";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const isMenuOpen = useSelector((state) => state.app.isMenuOpen);
-  const hoverProperty = "hover:bg-gray-200 hover:rounded-2xl";
+  const hoverProperty = "hover:bg-gray-200 hover:rounded-2xl cursor-pointer";
   if (!isMenuOpen) return null;
 
   return (
     <div className="flex flex-col text-center">
-      <div className={`my-2 py-2 ${hoverProperty}`}>
-        <ImageComp
-          classNameSource={"h-6 m-auto"}
-          altSource={"home-icon"}
-          srcSource={
-            "https://cdn0.iconfinder.com/data/icons/typicons-2/24/home-512.png"
-          }
-        />
-        <span className="text-center text-sm">Home</span>
-      </div>
+      <Link to="/">
+        <div className={`my-2 py-2 ${hoverProperty}`}>
+          <ImageComp
+            classNameSource={"h-6 m-auto"}
+            altSource={"home-icon"}
+            srcSource={
+              "https://cdn0.iconfinder.com/data/icons/typicons-2/24/home-512.png"
+            }
+          />
+          <span className="text-center text-sm">Home</span>
+        </div>
+      </Link>
       <div className={`my-2 py-2 ${hoverProperty}`}>
         <ImageComp
           classNameSource={"h-6 m-auto"}
