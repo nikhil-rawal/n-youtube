@@ -1,13 +1,18 @@
 import React from "react";
 
-const ImageComp = ({ classname, altname, srcname, onclick }) => {
+const ImageComp = ({
+  classNameSource,
+  altSource,
+  srcSource,
+  onClickSource,
+}) => {
   return (
     <>
       <img
-        className={classname}
-        alt={altname}
-        src={srcname}
-        onClick={onclick}
+        className={classNameSource}
+        alt={altSource}
+        src={srcSource}
+        onClick={onClickSource}
       />
     </>
   );

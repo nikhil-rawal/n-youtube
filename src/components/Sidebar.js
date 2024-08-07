@@ -11,9 +11,9 @@ const Sidebar = () => {
     <div className="flex flex-col text-center">
       <div className={`my-2 py-2 ${hoverProperty}`}>
         <ImageComp
-          classname={"h-6 m-auto"}
-          altname={"home-icon"}
-          srcname={
+          classNameSource={"h-6 m-auto"}
+          altSource={"home-icon"}
+          srcSource={
             "https://cdn0.iconfinder.com/data/icons/typicons-2/24/home-512.png"
           }
         />
@@ -21,9 +21,9 @@ const Sidebar = () => {
       </div>
       <div className={`my-2 py-2 ${hoverProperty}`}>
         <ImageComp
-          classname={"h-6 m-auto"}
-          altname={"shorts-icon"}
-          srcname={
+          classNameSource={"h-6 m-auto"}
+          altSource={"shorts-icon"}
+          srcSource={
             "https://seeklogo.com/images/Y/youtube-shorts-logo-E2B507EF18-seeklogo.com.png"
           }
         />
@@ -31,9 +31,9 @@ const Sidebar = () => {
       </div>
       <div className={`my-2 py-2 ${hoverProperty}`}>
         <ImageComp
-          classname={"h-6 m-auto"}
-          altname={"subscriptions-icon"}
-          srcname={
+          classNameSource={"h-6 m-auto"}
+          altSource={"subscriptions-icon"}
+          srcSource={
             "https://cdn3.iconfinder.com/data/icons/social-media-2487/24/subscription-512.png"
           }
         />
@@ -41,9 +41,9 @@ const Sidebar = () => {
       </div>
       <div className={`my-2 py-2 ${hoverProperty}`}>
         <ImageComp
-          classname={"h-6 m-auto"}
-          altname={"home-icon"}
-          srcname={
+          classNameSource={"h-6 m-auto"}
+          altSource={"home-icon"}
+          srcSource={
             "https://static-00.iconduck.com/assets.00/youtube-music-icon-512x512-tzy5jsl3.png"
           }
         />
@@ -51,17 +51,17 @@ const Sidebar = () => {
       </div>
       <div className={`my-2 py-2 ${hoverProperty}`}>
         <ImageComp
-          classname={"h-6 m-auto"}
-          altname={"history-icon"}
-          srcname={"https://cdn-icons-png.freepik.com/512/2961/2961948.png"}
+          classNameSource={"h-6 m-auto"}
+          altSource={"history-icon"}
+          srcSource={"https://cdn-icons-png.freepik.com/512/2961/2961948.png"}
         />
         <span className="text-center text-sm">History</span>
       </div>
       <div className={`my-1 py-1 ${hoverProperty}`}>
         <ImageComp
-          classname={"h-12 m-auto"}
-          altname={"podcast-icon"}
-          srcname={
+          classNameSource={"h-12 m-auto"}
+          altSource={"podcast-icon"}
+          srcSource={
             "https://www.shutterstock.com/image-vector/podcast-icon-vector-isolated-on-600nw-2368666423.jpg"
           }
         />
@@ -69,9 +69,9 @@ const Sidebar = () => {
       </div>
       <div className={`my-1 py-1 ${hoverProperty}`}>
         <ImageComp
-          classname={"h-10 m-auto"}
-          altname={"liked-icon"}
-          srcname={
+          classNameSource={"h-10 m-auto"}
+          altSource={"liked-icon"}
+          srcSource={
             "https://static.vecteezy.com/system/resources/thumbnails/000/422/468/small/Multimedia__28107_29.jpg"
           }
         />
@@ -79,9 +79,9 @@ const Sidebar = () => {
       </div>
       <div className={`my-2 py-2 ${hoverProperty}`}>
         <ImageComp
-          classname={"h-10 m-auto"}
-          altname={"Trending-icon"}
-          srcname={
+          classNameSource={"h-10 m-auto"}
+          altSource={"Trending-icon"}
+          srcSource={
             "https://cdn1.iconfinder.com/data/icons/youtube-23/31/Subtract-14-512.png"
           }
         />
