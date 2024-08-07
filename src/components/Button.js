@@ -1,9 +1,11 @@
 import React from "react";
 
-const Button = () => {
+const Button = ({ topic }) => {
   return (
-    <div className="bg-gray-400">
-      <button>All</button>
+    <div>
+      <button className="bg-gray-200 p-[0.40rem] mx-2 rounded-lg hover:bg-gray-300">
+        {topic}
+      </button>
     </div>
   );
 };
