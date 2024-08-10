@@ -1,9 +1,13 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { closeMenu } from "../utils/appSlice";
 
 const WatchPage = () => {
-  let { id } = useParams();
-  return <h2>User ID: {id}</h2>;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(closeMenu());
+  }, []);
+  return <div>o hello</div>;
 };
 
 export default WatchPage;
