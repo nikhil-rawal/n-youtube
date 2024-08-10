@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         element: <MainContainer />,
       },
       {
-        path: "/WatchPage/swg3Dzee61U",
+        path: "/WatchPage",
         element: <WatchPage />,
       },
     ],
