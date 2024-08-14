@@ -11,21 +11,38 @@ const VideoContainer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // checkFunctionWorking(getVideos);
+    // checkFunctionWorking(getUser);
     getVideos();
     getUser();
+    // Later - add if api limit reached, what to show - or may use another API key???
   }, []);
 
+  // const checkFunctionWorking = async (fn) => {
+  //   const currentFn = await fn();
+  //   currentFn ? currentFn() : console.log("API Limit reached");
+  // };
+
   const getVideos = async () => {
-    const data = await fetch(yt_api_link);
-    const json = await data?.json();
-    setAllVideos(json?.items);
+    try {
+      const data = await fetch(yt_api_link);
+      const json = await data?.json();
+      setAllVideos(json?.items);
+    } catch (error) {
+      console.error("Error Fetching Data", error);
+    }
+    return undefined;
   };
 
   const getUser = async () => {
-    const data = await fetch(github_api_link);
-    const json = await data?.json();
-    setUserData(json);
-    console.log(json);
+    try {
+      const data = await fetch(github_api_link);
+      const json = await data?.json();
+      json && setUserData(json);
+    } catch (error) {
+      console.error("Error Fetching Data", error);
+    }
+    return undefined;
   };
 
   const HighVideoCard = (VideoCard, customProps) => {
@@ -42,19 +59,24 @@ const VideoContainer = () => {
 
   return (
     <div className="flex flex-wrap m-2 p-2">
-      <a
-        href="https://github.com/nikhil-rawal"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <AdCard
-          key={userData?.id}
-          customTitle={userData?.name}
-          customThumbnail={userData?.avatar_url}
-          customAlt={userData?.login}
-          customBio={userData?.bio}
-        />
-      </a>
+      {
+        <>
+          <a
+            href="https://github.com/nikhil-rawal"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <AdCard
+              key={userData?.id}
+              customTitle={userData?.name}
+              customThumbnail={userData?.avatar_url}
+              customAlt={userData?.login}
+              customBio={userData?.bio}
+            />
+          </a>
+        </>
+      }
+
       {allVideos?.length > 1 &&
         allVideos?.map((videoItem) => (
           <Link

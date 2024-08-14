@@ -1,14 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ImageComp from "../utils/ImageComp";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { Link } from "react-router-dom";
-
+import { yt_search_link } from "../utils/constants";
+import { REACT_APP_YTKEY } from "../utils/constants";
 const Head = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      searchSuggestion();
+    }, 250);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
+
+  // YT Search Autocomplete
+  const searchSuggestion = async () => {
+    const data = await fetch(yt_search_link + searchQuery);
+    const json = await data.json();
+  };
+
+  // YT Search Results
+  const tryData = async () => {
+    const data1 = await fetch(
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=iphone&key=${REACT_APP_YTKEY}`
+    );
+    const json1 = await data1.json();
+    console.log(json1);
+  };
+
   const hoverCSS = "hover:bg-gray-200 hover:rounded-full";
   return (
     <div className="grid grid-flow-col p-2 m-2">
@@ -35,6 +63,8 @@ const Head = () => {
             className="w-96 h-9 p-4 rounded-l-full border border-solid outline-none "
             type="text"
             placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <button className="h-9 rounded-r-full border border-solid">
             <ImageComp
