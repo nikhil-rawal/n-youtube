@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { yt_api_link } from "../utils/constants";
 import VideoCard from "./VideoCard";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setVideoData } from "../utils/appSlice";
 
 const VideoContainer = () => {
   const [allVideos, setAllVideos] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getVideos();
@@ -19,7 +23,12 @@ const VideoContainer = () => {
     <div className="flex flex-wrap m-2 p-2">
       {allVideos.length > 1 &&
         allVideos.map((videoItem) => (
-          <VideoCard info={videoItem} key={videoItem.id} />
+          <Link
+            to={`/WatchPage?v=${videoItem.id}`}
+            onClick={() => dispatch(setVideoData(videoItem))}
+          >
+            <VideoCard info={videoItem} key={videoItem.id} />
+          </Link>
         ))}
     </div>
   );
