@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isMenuOpen: true,
-  videoData: null,
+  videoData: JSON.parse(localStorage.getItem("videoData")) || null, // load videoData if present in localStorage
 };
 const appSlice = createSlice({
   name: "app",
@@ -19,9 +19,11 @@ const appSlice = createSlice({
     },
     setVideoData: (state, action) => {
       state.videoData = action.payload;
+      localStorage.setItem("videoData", JSON.stringify(action.payload)); // Save videoData to local storage
     },
     clearVideo: (state) => {
       state.videoData = null;
+      localStorage.removeItem("videoData"); // Clear videoData to local storage
     },
   },
 });

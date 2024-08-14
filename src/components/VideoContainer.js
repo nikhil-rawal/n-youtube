@@ -15,19 +15,19 @@ const VideoContainer = () => {
 
   const getVideos = async () => {
     const data = await fetch(yt_api_link);
-    const json = await data.json();
-    setAllVideos(json.items);
+    const json = await data?.json();
+    setAllVideos(json?.items);
   };
 
   return (
     <div className="flex flex-wrap m-2 p-2">
-      {allVideos.length > 1 &&
-        allVideos.map((videoItem) => (
+      {allVideos?.length > 1 &&
+        allVideos?.map((videoItem) => (
           <Link
-            to={`/WatchPage?v=${videoItem.id}`}
-            onClick={() => dispatch(setVideoData(videoItem))}
+            to={`/WatchPage?v=${videoItem?.id}`}
+            onClick={() => dispatch(setVideoData(videoItem))} //sending data to appSlice - videoData
           >
-            <VideoCard info={videoItem} key={videoItem.id} />
+            <VideoCard info={videoItem} key={videoItem?.id} />
           </Link>
         ))}
     </div>
