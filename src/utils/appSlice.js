@@ -9,7 +9,7 @@ const appSlice = createSlice({
   initialState,
   reducers: {
     toggleMenu: (state) => {
-      state.isMenuOpen = !state.isMenuOpen; //Check menu open
+      state.isMenuOpen = !state.isMenuOpen; //Check menu open - another comment check
     },
     closeMenu: (state) => {
       state.isMenuOpen = false;
