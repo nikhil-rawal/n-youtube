@@ -31,7 +31,7 @@ const VideoCard = ({
               Higher Order Component
             </span>
             <span className="text-sm font-light text-red-600">
-              Github nikhil-rawal
+              Github {customAlt}
             </span>
           </>
         )}
