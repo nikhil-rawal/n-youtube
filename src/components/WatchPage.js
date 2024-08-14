@@ -22,8 +22,6 @@ const WatchPage = () => {
     }
   }, [dispatch, videoData]);
 
-  console.log(videoData);
-
   const embedURL = "https://www.youtube.com/embed/" + videoId;
   return (
     <div className="m-3 my-2 p-4">
