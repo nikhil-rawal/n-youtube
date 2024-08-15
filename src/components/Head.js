@@ -5,6 +5,7 @@ import { toggleMenu } from "../utils/appSlice";
 import { Link } from "react-router-dom";
 import { yt_search_link } from "../utils/constants";
 import { REACT_APP_YTKEY } from "../utils/constants";
+
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Head = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      searchSuggestion();
+      const autocompleteSearches = searchSuggestion();
     }, 250);
 
     return () => {
@@ -26,6 +27,7 @@ const Head = () => {
   const searchSuggestion = async () => {
     const data = await fetch(yt_search_link + searchQuery);
     const json = await data.json();
+    return json[1];
   };
 
   // YT Search Results

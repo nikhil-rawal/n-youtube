@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { yt_api_link, github_api_link } from "../utils/constants";
 import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setVideoData } from "../utils/appSlice";
 
 const VideoContainer = () => {
@@ -11,17 +11,10 @@ const VideoContainer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // checkFunctionWorking(getVideos);
-    // checkFunctionWorking(getUser);
     getVideos();
     getUser();
     // Later - add if api limit reached, what to show - or may use another API key???
   }, []);
-
-  // const checkFunctionWorking = async (fn) => {
-  //   const currentFn = await fn();
-  //   currentFn ? currentFn() : console.log("API Limit reached");
-  // };
 
   const getVideos = async () => {
     try {
@@ -56,9 +49,10 @@ const VideoContainer = () => {
   };
 
   const AdCard = HighVideoCard(VideoCard);
+  const checkOpen = useSelector((state) => state.app.isMenuOpen);
 
   return (
-    <div className="flex flex-wrap m-2 p-2">
+    <div className={"flex flex-wrap m-2 p-2"}>
       {
         <>
           <a
