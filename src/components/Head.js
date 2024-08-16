@@ -8,6 +8,7 @@ import { REACT_APP_YTKEY } from "../utils/constants";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchSuggestions, setSearchSuggestions] = useState("");
   const dispatch = useDispatch();
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
@@ -15,7 +16,7 @@ const Head = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const autocompleteSearches = searchSuggestion();
+      const autocompleteSearches = searchFunction();
     }, 250);
 
     return () => {
@@ -24,10 +25,11 @@ const Head = () => {
   }, [searchQuery]);
 
   // YT Search Autocomplete
-  const searchSuggestion = async () => {
+  const searchFunction = async () => {
     const data = await fetch(yt_search_link + searchQuery);
     const json = await data.json();
-    return json[1];
+    setSearchSuggestions(json[1]);
+    console.log(searchSuggestions);
   };
 
   // YT Search Results
@@ -61,13 +63,41 @@ const Head = () => {
       </div>
       <div className="flex col-span-8 justify-center ">
         <div className="flex">
-          <input
-            className="w-96 h-9 p-4 rounded-l-full border border-solid outline-none "
-            type="text"
-            placeholder="Search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+          <div>
+            <input
+              className="w-96 h-9 p-4 rounded-l-full border border-solid outline-none "
+              type="text"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchSuggestions.length > 1 && (
+              <span
+                className="cursor-pointer fixed mt-[6px] -ml-7"
+                onClick={() => {
+                  setSearchSuggestions("");
+                  setSearchQuery("");
+                }}
+              >
+                ╳
+              </span>
+            )}
+
+            {searchSuggestions.length > 1 && (
+              <div className="w-96 h-9 py-[0.1rem] px-2 fixed ">
+                <ul>
+                  {searchSuggestions.map((suggestion) => (
+                    <li
+                      className="pl-2 bg-white hover:bg-gray-200 cursor-pointer rounded border-gray-100 py-2"
+                      key={suggestion}
+                    >
+                      🔍 {suggestion}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
           <button className="h-9 rounded-r-full border border-solid">
             <ImageComp
               classNameSource={`h-8 mx-2`}
