@@ -43,7 +43,8 @@ const Head = () => {
 
   const hoverCSS = "hover:bg-gray-200 hover:rounded-full";
   return (
-    <div className="grid grid-flow-col p-2 m-2">
+    // <div className="grid grid-flow-col p-2 m-2 fixed">
+    <div className="flex flex-row p-2 m-2 fixed">
       <div className="flex col-span-2 justify-start">
         <ImageComp
           onClickSource={() => toggleMenuHandler()}
