@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { yt_search_link } from "../utils/constants";
 import { REACT_APP_YTKEY } from "../utils/constants";
 
+import { SlMenu } from "react-icons/sl";
+import { CiSearch } from "react-icons/ci";
+
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState("");
@@ -41,25 +44,24 @@ const Head = () => {
     console.log(json1);
   };
 
-  const hoverCSS = "hover:bg-gray-200 hover:rounded-full";
+  const hoverCSS = "cursor-pointer";
   return (
-    // <div className="grid grid-flow-col p-2 m-2 fixed">
-    <div className="flex flex-row p-2 m-2 fixed">
+    <div className="grid grid-cols-12 p-2 m-2">
       <div className="flex col-span-2 justify-start">
-        <ImageComp
-          onClickSource={() => toggleMenuHandler()}
-          classNameSource={`h-9 mx-4 cursor-pointer ${hoverCSS}`}
-          altSource={`menu`}
-          srcSource={`https://cdn.iconscout.com/icon/free/png-256/free-hamburger-menu-462145.png?f=webp&w=256`}
-        />
+        <div className="ml-1 hover:bg-gray-200 cursor-pointer p-3 rounded-full flex items-center justify-center">
+          <button>
+            <SlMenu onClick={() => toggleMenuHandler()} className={`size-5`} />
+          </button>
+        </div>
         <Link to="/">
-          <ImageComp
-            classNameSource={`h-8 mx-5 cursor-pointer`}
-            altSource={"youtube-logo"}
-            srcSource={
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGJrpSqrv7Va8wkAJCoRTsHWDJyXJEe_ypDw&s"
-            }
-          />
+          <div className="cursor-pointer my-2 ml-4">
+            <img
+              className="h-6"
+              alt="youtube-logo"
+              src="/yt_logo_rgb_light.png"
+              //yt_logo_rgb_dark.png
+            />
+          </div>
         </Link>
       </div>
       <div className="flex col-span-8 justify-center ">
@@ -99,7 +101,12 @@ const Head = () => {
               </div>
             )}
           </div>
-          <button className="h-9 rounded-r-full border border-solid">
+          <div className="border border-solid rounded-r-full">
+            <button>
+              <CiSearch className={`size-7`} />
+            </button>
+          </div>
+          {/* <button className="h-9 rounded-r-full border border-solid">
             <ImageComp
               classNameSource={`h-8 mx-2`}
               altSource={"search-icon"}
@@ -107,7 +114,7 @@ const Head = () => {
                 "https://static.vecteezy.com/system/resources/thumbnails/009/652/218/small_2x/magnifying-glass-icon-isolated-on-white-background-search-illustration-vector.jpg"
               }
             />
-          </button>
+          </button> */}
         </div>
         <ImageComp
           classNameSource={`h-7 mx-5 cursor-pointer ${hoverCSS}`}

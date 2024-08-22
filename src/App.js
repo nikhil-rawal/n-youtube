@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
+      <div className="App text-black bg-white dark:text-white dark:bg-black">
         <Head />
         <Body />
       </div>

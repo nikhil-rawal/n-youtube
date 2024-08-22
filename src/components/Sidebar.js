@@ -3,36 +3,55 @@ import ImageComp from "../utils/ImageComp";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { IoMdHome } from "react-icons/io";
+import { SiYoutubeshorts } from "react-icons/si";
+import { MdOutlineSubscriptions } from "react-icons/md";
+import { SiYoutubemusic } from "react-icons/si";
+import { MdOutlineSelfImprovement } from "react-icons/md";
+
 const Sidebar = () => {
   const isMenuOpen = useSelector((state) => state.app.isMenuOpen);
-  const hoverProperty = "hover:bg-gray-200 hover:rounded-2xl cursor-pointer";
+  const spanProperty = "my-2 text-center text-xs truncate";
+  const divProperty =
+    "flex flex-col items-center justify-center py-4 hover:bg-gray-100 hover:rounded-2xl cursor-pointer";
   if (!isMenuOpen) return null;
 
   return (
-    <div className="flex flex-col text-center">
+    <div className="flex flex-col text-center hover:bg-top bg-bottom">
       <Link to="/">
-        <div className={`my-2 py-2 ${hoverProperty}`}>
-          <ImageComp
-            classNameSource={"h-6 m-auto"}
-            altSource={"home-icon"}
-            srcSource={
-              "https://cdn0.iconfinder.com/data/icons/typicons-2/24/home-512.png"
-            }
-          />
-          <span className="text-center text-sm">Home</span>
+        <div className={divProperty}>
+          <button>
+            <IoMdHome className="size-5" />
+          </button>
+          <span className={spanProperty}>Home</span>
         </div>
       </Link>
-      <div className={`my-2 py-2 ${hoverProperty}`}>
-        <ImageComp
-          classNameSource={"h-6 m-auto"}
-          altSource={"shorts-icon"}
-          srcSource={
-            "https://seeklogo.com/images/Y/youtube-shorts-logo-E2B507EF18-seeklogo.com.png"
-          }
-        />
-        <span className="text-center text-sm">Shorts</span>
+      <div className={divProperty}>
+        <button>
+          <SiYoutubeshorts className="size-5" />
+        </button>
+        <span className={spanProperty}>Shorts</span>
       </div>
-      <div className={`my-2 py-2 ${hoverProperty}`}>
+      <div className={divProperty}>
+        <button>
+          <MdOutlineSubscriptions className="size-5" />
+        </button>
+        <span className={spanProperty}>Subscriptions</span>
+      </div>
+      <div className={divProperty}>
+        <button>
+          <SiYoutubemusic className="size-5" />
+        </button>
+        <span className={spanProperty}>YouTube Music</span>
+      </div>
+      <div className={divProperty}>
+        <button>
+          <MdOutlineSelfImprovement className="size-5" />
+        </button>
+        <span className={spanProperty}>You</span>
+      </div>
+
+      {/* <div className={`my-2 py-2 ${hoverProperty}`}>
         <ImageComp
           classNameSource={"h-6 m-auto"}
           altSource={"subscriptions-icon"}
@@ -89,7 +108,7 @@ const Sidebar = () => {
           }
         />
         <span className="text-center text-sm">Trending</span>
-      </div>
+      </div> */}
     </div>
   );
 };
