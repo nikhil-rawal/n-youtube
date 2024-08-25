@@ -10,6 +10,10 @@ import { SlMenu } from "react-icons/sl";
 import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { MdKeyboardVoice } from "react-icons/md";
+import { RiVideoAddLine } from "react-icons/ri";
+import { MdOutlineNotificationsActive } from "react-icons/md";
+import { BsFillMoonStarsFill } from "react-icons/bs";
+import { LuSun } from "react-icons/lu";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -79,11 +83,11 @@ const Head = () => {
           </div>
         </Link>
       </div>
-      <div className="flex col-span-8 justify-center ">
+      <div className="flex col-span-8 justify-center space-between">
         <div className="relative flex">
           <input
             ref={inputRef}
-            className="w-[550px] h-10 p-4 rounded-l-full border border-solid outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+            className="w-[550px] h-[42px] p-4 rounded-l-full border border-solid outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
             type="text"
             placeholder="Search"
             value={searchQuery}
@@ -101,7 +105,7 @@ const Head = () => {
               <RxCross1 className="size-5" />
             </div>
           )}
-          <div className="flex items-center justify-center border h-10 w-14 bg-gray-50 hover:bg-gray-200 border-solid rounded-r-full">
+          <div className="flex items-center justify-center border h-[42px] w-14 bg-gray-50 hover:bg-gray-200 border-solid rounded-r-full">
             <button>
               <CiSearch className="size-6" />
             </button>
@@ -122,46 +126,33 @@ const Head = () => {
             </div>
           )}
         </div>
-        <div className="ml-2 bg-gray-100 hover:bg-gray-200 cursor-pointer p-3 rounded-full flex items-center justify-center">
+        <div className="ml-2 bg-gray-100 hover:bg-gray-200 cursor-pointer w-11 h-11 p-2 rounded-full flex items-center justify-center">
           <button>
-            <MdKeyboardVoice className={`size-5`} />
+            <MdKeyboardVoice className={`size-6`} />
           </button>
         </div>
       </div>
       <div className="flex col-span-2 justify-end ">
-        <ImageComp
-          classNameSource={`h-8 mx-4 cursor-pointer ${hoverCSS}`}
-          altSource={"create-video"}
-          srcSource={"https://static.thenounproject.com/png/3750242-200.png"}
-        />
-        <ImageComp
-          classNameSource={`h-8 mx-4 cursor-pointer ${hoverCSS}`}
-          altSource={"notifications-icon"}
-          srcSource={
-            "https://static.vecteezy.com/system/resources/previews/015/934/666/original/bell-icon-simple-element-symbol-for-template-design-can-be-used-for-website-and-mobile-application-vector.jpg"
-          }
-        />
-        <ImageComp
-          classNameSource={`h-8 mx-4 cursor-pointer ${hoverCSS}`}
-          altSource={"user-icon"}
-          srcSource={
-            "https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
-          }
-        />
-        <ImageComp
-          classNameSource={`h-8 mx-4 cursor-pointer ${hoverCSS}`}
-          altSource={"night-mode"}
-          srcSource={
-            "https://cdn4.iconfinder.com/data/icons/remixicon-weather/24/moon-clear-line-1024.png"
-          }
-        />
-        <ImageComp
-          classNameSource={`h-8 mx-4 cursor-pointer ${hoverCSS}`}
-          altSource={"day-mode"}
-          srcSource={
-            "https://cdn3.iconfinder.com/data/icons/weather-free-2/32/Weather_Free_Outline_day-weather-sun-1024.png"
-          }
-        />
+        <div className="ml-2 hover:bg-gray-200 cursor-pointer p-3 rounded-full flex items-center justify-center">
+          <button>
+            <RiVideoAddLine className={`size-6`} />
+          </button>
+        </div>
+        <div className="ml-2 hover:bg-gray-200 cursor-pointer p-3 rounded-full flex items-center justify-center">
+          <button>
+            <MdOutlineNotificationsActive className={`size-6`} />
+          </button>
+        </div>
+        <div className="ml-2 hover:bg-gray-200 cursor-pointer p-3 rounded-full flex items-center justify-center">
+          <button>
+            <BsFillMoonStarsFill className={`size-6`} />
+          </button>
+        </div>
+        <div className="ml-2 hover:bg-gray-200 cursor-pointer p-3 rounded-full flex items-center justify-center">
+          <button>
+            <LuSun className={`size-6`} />
+          </button>
+        </div>
       </div>
     </div>
   );
