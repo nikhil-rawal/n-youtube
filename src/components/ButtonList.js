@@ -1,15 +1,16 @@
 import React from "react";
 import Button from "./Button";
+import { MdArrowBackIosNew } from "react-icons/md";
+import { MdArrowForwardIos } from "react-icons/md";
 
 const ButtonList = () => {
   return (
-    <div className="flex ">
+    <div className="flex text-md font-semibold">
       <Button topic="Olympics" />
       <Button topic="Motivational" />
       <Button topic="Devotional" />
       <Button topic="Ambani Family" />
       <Button topic="Football" />
-      <Button topic="Cricket" />
       <Button topic="Toronto" />
       <Button topic="Modi" />
       <Button topic="Wildfires" />
