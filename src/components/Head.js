@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ImageComp from "../utils/ImageComp";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
@@ -8,13 +8,22 @@ import { REACT_APP_YTKEY } from "../utils/constants";
 
 import { SlMenu } from "react-icons/sl";
 import { CiSearch } from "react-icons/ci";
+import { RxCross1 } from "react-icons/rx";
+import { MdKeyboardVoice } from "react-icons/md";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState("");
+  const inputRef = useRef(null);
   const dispatch = useDispatch();
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
+  };
+
+  const handleClickOutside = (event) => {
+    if (inputRef.current && !inputRef.current.contains(event.target)) {
+      setSearchSuggestions("");
+    }
   };
 
   useEffect(() => {
@@ -22,17 +31,23 @@ const Head = () => {
       const autocompleteSearches = searchFunction();
     }, 250);
 
+    document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       clearTimeout(timer);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [searchQuery]);
+
+  // const showSuggestions = () => {
+  //   searchFunction();
+  // };
 
   // YT Search Autocomplete
   const searchFunction = async () => {
     const data = await fetch(yt_search_link + searchQuery);
     const json = await data.json();
     setSearchSuggestions(json[1]);
-    console.log(searchSuggestions);
   };
 
   // YT Search Results
@@ -65,62 +80,53 @@ const Head = () => {
         </Link>
       </div>
       <div className="flex col-span-8 justify-center ">
-        <div className="flex">
-          <div>
-            <input
-              className="w-96 h-9 p-4 rounded-l-full border border-solid outline-none "
-              type="text"
-              placeholder="Search"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            {searchSuggestions.length > 1 && (
-              <span
-                className="cursor-pointer fixed mt-[6px] -ml-7"
-                onClick={() => {
-                  setSearchSuggestions("");
-                  setSearchQuery("");
-                }}
-              >
-                ╳
-              </span>
-            )}
+        <div className="relative flex">
+          <input
+            ref={inputRef}
+            className="w-[550px] h-10 p-4 rounded-l-full border border-solid outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
 
-            {searchSuggestions.length > 1 && (
-              <div className="w-96 h-9 py-[0.1rem] px-2 fixed ">
-                <ul>
-                  {searchSuggestions.map((suggestion) => (
-                    <li
-                      className="pl-2 bg-white hover:bg-gray-200 cursor-pointer rounded border-gray-100 py-2"
-                      key={suggestion}
-                    >
-                      🔍 {suggestion}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-          <div className="border border-solid rounded-r-full">
+          {searchQuery && (
+            <div
+              className="absolute right-16 top-1/2 transform -translate-y-1/2 cursor-pointer hover:bg-gray-200 rounded-full p-[6px]"
+              onClick={() => {
+                setSearchQuery("");
+                setSearchSuggestions([]);
+              }}
+            >
+              <RxCross1 className="size-5" />
+            </div>
+          )}
+          <div className="flex items-center justify-center border h-10 w-14 bg-gray-50 hover:bg-gray-200 border-solid rounded-r-full">
             <button>
-              <CiSearch className={`size-7`} />
+              <CiSearch className="size-6" />
             </button>
           </div>
-          {/* <button className="h-9 rounded-r-full border border-solid">
-            <ImageComp
-              classNameSource={`h-8 mx-2`}
-              altSource={"search-icon"}
-              srcSource={
-                "https://static.vecteezy.com/system/resources/thumbnails/009/652/218/small_2x/magnifying-glass-icon-isolated-on-white-background-search-illustration-vector.jpg"
-              }
-            />
-          </button> */}
+          {searchSuggestions.length > 0 && (
+            <div className="absolute top-full left-0 w-[550px] bg-white rounded shadow-black drop-shadow-lg py-2 mt-1">
+              <ul className="py-2">
+                {searchSuggestions.map((suggestion) => (
+                  <li
+                    className="pl-4 text-sm font-semibold hover:bg-gray-200 rounded border-white border py-2 flex items-center"
+                    key={suggestion}
+                  >
+                    <CiSearch className="size-5 mr-2" />
+                    {suggestion}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-        <ImageComp
-          classNameSource={`h-7 mx-5 cursor-pointer ${hoverCSS}`}
-          altSource={"search-using-voice"}
-          srcSource={"https://www.svgrepo.com/show/44666/voice-recorder.svg"}
-        />
+        <div className="ml-2 bg-gray-100 hover:bg-gray-200 cursor-pointer p-3 rounded-full flex items-center justify-center">
+          <button>
+            <MdKeyboardVoice className={`size-5`} />
+          </button>
+        </div>
       </div>
       <div className="flex col-span-2 justify-end ">
         <ImageComp
