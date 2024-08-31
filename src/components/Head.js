@@ -67,7 +67,7 @@ const Head = () => {
     <div className="flex flex-col fixed top-0 left-0 right-0 bg-white p-2 px-6">
       <div className="grid grid-cols-12">
         <div className="flex col-span-2 justify-start">
-          <div className="ml-1 hover:bg-gray-200 cursor-pointer p-3 rounded-full flex items-center justify-center">
+          <div className="-ml-2 hover:bg-gray-200 cursor-pointer p-3 rounded-full flex items-center justify-center">
             <button>
               <SlMenu
                 onClick={() => toggleMenuHandler()}
@@ -157,9 +157,6 @@ const Head = () => {
             </button>
           </div>
         </div>
-      </div>
-      <div className="ml-24 pt-4">
-        <ButtonList />
       </div>
     </div>
   );

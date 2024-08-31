@@ -21,6 +21,7 @@ const VideoContainer = () => {
       const data = await fetch(yt_api_link);
       const json = await data?.json();
       setAllVideos(json?.items);
+      console.log(json);
     } catch (error) {
       console.error("Error Fetching Data", error);
     }

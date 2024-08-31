@@ -5,8 +5,12 @@ import { Outlet } from "react-router-dom";
 const Body = () => {
   return (
     <div className="flex mt-16 body">
-      <Sidebar />
-      <Outlet />
+      <div className="fixed">
+        <Sidebar />
+      </div>
+      <div className="mt-2 ml-[50px]">
+        <Outlet />
+      </div>
     </div>
   );
 };

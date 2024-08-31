@@ -24,7 +24,7 @@ const WatchPage = () => {
 
   const embedURL = "https://www.youtube.com/embed/" + videoId;
   return (
-    <div className="m-3 my-2 p-4">
+    <div className="">
       <iframe
         width="970"
         height="540"

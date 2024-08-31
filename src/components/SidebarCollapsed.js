@@ -8,44 +8,43 @@ import { SiYoutubemusic } from "react-icons/si";
 import { MdOutlineSelfImprovement } from "react-icons/md";
 
 const SidebarCollapsed = () => {
-  const spanProperty = "mt-2 text-center text-[11px] truncate";
+  const paraProperty = "mt-2 text-[9px] line-clamp-2";
   const divProperty =
-    "truncate flex flex-col items-center justify-center pt-[12px] my-1 hover:bg-gray-100 hover:rounded-xl cursor-pointer";
+    "w-16 truncate flex flex-col items-center justify-center py-[16px] my-1 hover:bg-gray-100 hover:rounded-xl cursor-pointer";
 
   return (
-    <div className="flex flex-col text-center hover:bg-top bg-bottom pl-1 z-10 sidebar-collapsed">
+    <div className="flex flex-col hover:bg-top bg-bottom pl-[2px] z-10 sidebar-collapsed">
       <Link to="/">
         <div className={divProperty}>
           <button>
             <IoMdHome className="size-5" />
           </button>
-          <span className={spanProperty}>Home</span>
-          {/* <span className="text-xs"></span> */}
+          <p className={paraProperty}>Home</p>
         </div>
       </Link>
       <div className={divProperty}>
         <button>
           <SiYoutubeshorts className="size-5" />
         </button>
-        <span className={spanProperty}>Shorts</span>
+        <p className={paraProperty}>Shorts</p>
       </div>
       <div className={divProperty}>
         <button>
           <MdOutlineSubscriptions className="size-5" />
         </button>
-        <span className={spanProperty}>Subscriptions</span>
+        <p className={paraProperty}>Subscriptions</p>
       </div>
       <div className={divProperty}>
         <button>
           <SiYoutubemusic className="size-5" />
         </button>
-        <span className={spanProperty}>YouTube Music</span>
+        <p className={paraProperty}>YouTube Music</p>
       </div>
       <div className={divProperty}>
         <button>
           <MdOutlineSelfImprovement className="size-5" />
         </button>
-        <span className={spanProperty}>You</span>
+        <p className={paraProperty}>You</p>
       </div>
     </div>
   );
