@@ -11,7 +11,7 @@ const MainContainer = () => {
     dispatch(openMenu());
   }, []);
   return (
-    <div className={`m-3 p-3`}>
+    <div className={`mt-12 ml-3 main-container`}>
       <VideoContainer />
     </div>
   );

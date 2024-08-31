@@ -8,18 +8,19 @@ import { SiYoutubemusic } from "react-icons/si";
 import { MdOutlineSelfImprovement } from "react-icons/md";
 
 const SidebarCollapsed = () => {
-  const spanProperty = "my-2 text-center text-xs truncate";
+  const spanProperty = "mt-2 text-center text-[11px] truncate";
   const divProperty =
-    "truncate flex flex-col items-center justify-center py-[14px] my-1 hover:bg-gray-100 hover:rounded-2xl cursor-pointer";
+    "truncate flex flex-col items-center justify-center pt-[12px] my-1 hover:bg-gray-100 hover:rounded-xl cursor-pointer";
 
   return (
-    <div className="flex flex-col text-center hover:bg-top bg-bottom pl-2 z-10">
+    <div className="flex flex-col text-center hover:bg-top bg-bottom pl-1 z-10 sidebar-collapsed">
       <Link to="/">
         <div className={divProperty}>
           <button>
             <IoMdHome className="size-5" />
           </button>
           <span className={spanProperty}>Home</span>
+          {/* <span className="text-xs"></span> */}
         </div>
       </Link>
       <div className={divProperty}>
