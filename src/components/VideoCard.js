@@ -16,7 +16,13 @@ const VideoCard = ({
             "rounded-2xl w-[188px] object-contain line-clamp-3") ||
           "hover:rounded-none rounded-xl w-[322px] h-[181px] transition-all duration-300 ease-in delay-150"
         }
-        src={customThumbnail || info?.snippet?.thumbnails?.maxres?.url}
+        src={
+          customThumbnail ||
+          (info?.snippet?.thumbnails?.maxres?.url
+            ? info?.snippet?.thumbnails?.maxres?.url
+            : info?.snippet?.thumbnails?.high?.url)
+        }
+        // src={customThumbnail || info?.snippet?.thumbnails?.maxres?.url}
         alt={customAlt || info?.snippet?.title}
       />
       <div className="m-1 pl-1 flex flex-col">

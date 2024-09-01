@@ -9,7 +9,7 @@ const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("v");
   const dispatch = useDispatch();
-  const videoData = useSelector((state) => state?.app?.videoData); //coming from appSlice - videoData
+  const videoData = useSelector((state) => state.app.videoData); //coming from appSlice - videoData
 
   useEffect(() => {
     dispatch(closeMenu());

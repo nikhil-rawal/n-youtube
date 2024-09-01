@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isMenuOpen: true,
   videoData: JSON.parse(localStorage.getItem("videoData")) || null, // load videoData if present in localStorage
+  themeMode: "light",
 };
 const appSlice = createSlice({
   name: "app",
@@ -25,9 +26,19 @@ const appSlice = createSlice({
       state.videoData = null;
       localStorage.removeItem("videoData"); // Clear videoData to local storage
     },
+    toggleTheme: (state, action) => {
+      state.themeMode = action.payload;
+      localStorage.setItem("themeData", JSON.stringify(action.payload));
+    },
   },
 });
 
-export const { toggleMenu, closeMenu, openMenu, setVideoData, clearVideo } =
-  appSlice.actions;
+export const {
+  toggleMenu,
+  closeMenu,
+  openMenu,
+  setVideoData,
+  clearVideo,
+  toggleTheme,
+} = appSlice.actions;
 export default appSlice.reducer;
