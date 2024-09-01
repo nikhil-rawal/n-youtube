@@ -10,7 +10,7 @@ import { MdOutlineSelfImprovement } from "react-icons/md";
 const SidebarCollapsed = () => {
   const paraProperty = "mt-2 text-[9px] line-clamp-2";
   const divProperty =
-    "w-16 truncate flex flex-col items-center justify-center py-[16px] my-1 hover:bg-gray-100 hover:rounded-xl cursor-pointer";
+    "w-16 truncate flex flex-col items-center justify-center py-[16px] my-1 hover:bg-gray-100 dark:hover:bg-neutral-800 hover:rounded-xl cursor-pointer";
 
   return (
     <div className="flex flex-col hover:bg-top bg-bottom pl-[2px] z-10 sidebar-collapsed">

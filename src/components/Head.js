@@ -116,7 +116,7 @@ const Head = () => {
 
             {searchQuery && (
               <div
-                className="absolute right-16 top-1/2 transform -translate-y-1/2 cursor-pointer hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-full p-[6px]"
+                className="absolute right-16 top-1/2 transform -translate-y-1/2 cursor-pointer hover:bg-gray-200  dark:hover:bg-neutral-800 rounded-full p-[6px]"
                 onClick={() => {
                   setSearchQuery("");
                   setSearchSuggestions([]);
@@ -125,17 +125,17 @@ const Head = () => {
                 <RxCross1 className="size-5" />
               </div>
             )}
-            <div className="flex items-center justify-center border h-[42px] w-14 bg-gray-50 dark:bg-gray-950 dark:border-gray-700  hover:bg-gray-200 dark:hover:bg-neutral-800 border-solid rounded-r-full">
+            <div className="flex items-center justify-center border h-[42px] w-14 bg-gray-50 dark:bg-gray-950 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-neutral-800 border-solid rounded-r-full">
               <button>
                 <CiSearch className="size-6" />
               </button>
             </div>
-            {searchSuggestions.length > 0 && (
-              <div className="absolute top-full left-0 w-[550px] bg-white rounded shadow-black drop-shadow-lg py-2 mt-1">
+            {searchSuggestions?.length > 0 && (
+              <div className="absolute top-full left-0 w-[550px] bg-white dark:bg-neutral-900 rounded-md shadow-black drop-shadow-lg py-2 mt-1">
                 <ul className="py-2">
-                  {searchSuggestions.map((suggestion) => (
+                  {searchSuggestions?.map((suggestion) => (
                     <li
-                      className="pl-4 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-neutral-800 rounded border-white border py-2 flex items-center"
+                      className="pl-4 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-neutral-700 rounded border-white dark:border-neutral-900 border py-2 flex items-center"
                       key={suggestion}
                     >
                       <CiSearch className="size-5 mr-2" />
@@ -182,22 +182,6 @@ const Head = () => {
               </button>
             </div>
           )}
-          {/* <div
-            className="ml-2 hover:bg-gray-200 dark:hover:bg-neutral-800 cursor-pointer p-3 rounded-full flex items-center justify-center"
-            onClick={() => toggleThemeHandler("dark")}
-          >
-            <button>
-              <BsFillMoonStarsFill className={`size-6`} />
-            </button>
-          </div>
-          <div
-            className="ml-2 hover:bg-gray-200 dark:hover:bg-neutral-800 cursor-pointer p-3 rounded-full flex items-center justify-center"
-            onClick={() => toggleThemeHandler("light")}
-          >
-            <button>
-              <LuSun className={`size-6`} />
-            </button>
-          </div> */}
         </div>
       </div>
     </div>

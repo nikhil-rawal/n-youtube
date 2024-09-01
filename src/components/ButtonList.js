@@ -5,7 +5,7 @@ import { MdArrowForwardIos } from "react-icons/md";
 
 const ButtonList = () => {
   return (
-    <div className="flex text-md font-semibold">
+    <div className="flex text-sm font-semibold">
       <Button topic="Olympics" />
       <Button topic="Motivational" />
       <Button topic="Devotional" />
