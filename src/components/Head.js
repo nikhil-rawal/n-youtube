@@ -19,7 +19,7 @@ import ButtonList from "./ButtonList";
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState("");
-  const [theme, setTheme] = useState("light");
+  // const [theme, setTheme] = useState("light");
   const inputRef = useRef(null);
   const dispatch = useDispatch();
   const themeData = useSelector((state) => state.app.themeMode);
@@ -82,7 +82,7 @@ const Head = () => {
       <div className="grid grid-cols-12">
         <div className="flex col-span-2 justify-start">
           <div
-            className="-ml-2 hover:bg-gray-200 dark:hover:bg-stone-800 cursor-pointer p-3 rounded-full flex items-center justify-center"
+            className="-ml-2 hover:bg-gray-200 dark:hover:bg-neutral-800 cursor-pointer p-3 rounded-full flex items-center justify-center"
             onClick={() => toggleMenuHandler()}
           >
             <button>
@@ -107,7 +107,7 @@ const Head = () => {
           <div className="relative flex">
             <input
               ref={inputRef}
-              className="w-[550px] h-[42px] p-4 rounded-l-full border border-solid outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-black dark:border-gray-700"
+              className="w-[550px] h-[42px] p-4 rounded-l-full border border-solid outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-black dark:border-neutral-800"
               type="text"
               placeholder="Search"
               value={searchQuery}
@@ -116,7 +116,7 @@ const Head = () => {
 
             {searchQuery && (
               <div
-                className="absolute right-16 top-1/2 transform -translate-y-1/2 cursor-pointer hover:bg-gray-200 dark:hover:bg-stone-800 rounded-full p-[6px]"
+                className="absolute right-16 top-1/2 transform -translate-y-1/2 cursor-pointer hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-full p-[6px]"
                 onClick={() => {
                   setSearchQuery("");
                   setSearchSuggestions([]);
@@ -125,7 +125,7 @@ const Head = () => {
                 <RxCross1 className="size-5" />
               </div>
             )}
-            <div className="flex items-center justify-center border h-[42px] w-14 bg-gray-50 dark:bg-gray-950 dark:border-gray-700  hover:bg-gray-200 dark:hover:bg-stone-800 border-solid rounded-r-full">
+            <div className="flex items-center justify-center border h-[42px] w-14 bg-gray-50 dark:bg-gray-950 dark:border-gray-700  hover:bg-gray-200 dark:hover:bg-neutral-800 border-solid rounded-r-full">
               <button>
                 <CiSearch className="size-6" />
               </button>
@@ -135,7 +135,7 @@ const Head = () => {
                 <ul className="py-2">
                   {searchSuggestions.map((suggestion) => (
                     <li
-                      className="pl-4 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-stone-800 rounded border-white border py-2 flex items-center"
+                      className="pl-4 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-neutral-800 rounded border-white border py-2 flex items-center"
                       key={suggestion}
                     >
                       <CiSearch className="size-5 mr-2" />
@@ -146,25 +146,44 @@ const Head = () => {
               </div>
             )}
           </div>
-          <div className="ml-2 bg-gray-100 hover:bg-gray-200 dark:hover:bg-stone-800 cursor-pointer w-11 h-11 p-2 rounded-full flex items-center justify-center">
+          <div className="ml-2 bg-gray-100 dark:bg-neutral-900 hover:bg-gray-200 dark:hover:bg-neutral-800 cursor-pointer w-11 h-11 p-2 rounded-full flex items-center justify-center">
             <button>
               <MdKeyboardVoice className={`size-6`} />
             </button>
           </div>
         </div>
         <div className="flex col-span-2 justify-end ">
-          <div className="ml-2 hover:bg-gray-200 dark:hover:bg-stone-800 cursor-pointer p-3 rounded-full flex items-center justify-center">
+          <div className="ml-2 hover:bg-gray-200 dark:hover:bg-neutral-800 cursor-pointer p-3 rounded-full flex items-center justify-center">
             <button>
               <RiVideoAddLine className={`size-6`} />
             </button>
           </div>
-          <div className="ml-2 hover:bg-gray-200 dark:hover:bg-stone-800 cursor-pointer p-3 rounded-full flex items-center justify-center">
+          <div className="ml-2 hover:bg-gray-200 dark:hover:bg-neutral-800 cursor-pointer p-3 rounded-full flex items-center justify-center">
             <button>
               <MdOutlineNotificationsActive className={`size-6`} />
             </button>
           </div>
-          <div
-            className="ml-2 hover:bg-gray-200 dark:hover:bg-stone-800 cursor-pointer p-3 rounded-full flex items-center justify-center"
+          {themeData === "light" ? (
+            <div
+              className="ml-2 hover:bg-gray-200 dark:hover:bg-neutral-800 cursor-pointer p-3 rounded-full flex items-center justify-center"
+              onClick={() => toggleThemeHandler("dark")}
+            >
+              <button>
+                <BsFillMoonStarsFill className={`size-6`} />
+              </button>
+            </div>
+          ) : (
+            <div
+              className="ml-2 hover:bg-gray-200 dark:hover:bg-neutral-800 cursor-pointer p-3 rounded-full flex items-center justify-center"
+              onClick={() => toggleThemeHandler("light")}
+            >
+              <button>
+                <LuSun className={`size-6`} />
+              </button>
+            </div>
+          )}
+          {/* <div
+            className="ml-2 hover:bg-gray-200 dark:hover:bg-neutral-800 cursor-pointer p-3 rounded-full flex items-center justify-center"
             onClick={() => toggleThemeHandler("dark")}
           >
             <button>
@@ -172,13 +191,13 @@ const Head = () => {
             </button>
           </div>
           <div
-            className="ml-2 hover:bg-gray-200 dark:hover:bg-stone-800 cursor-pointer p-3 rounded-full flex items-center justify-center"
+            className="ml-2 hover:bg-gray-200 dark:hover:bg-neutral-800 cursor-pointer p-3 rounded-full flex items-center justify-center"
             onClick={() => toggleThemeHandler("light")}
           >
             <button>
               <LuSun className={`size-6`} />
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
