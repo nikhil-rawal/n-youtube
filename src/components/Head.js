@@ -89,7 +89,7 @@ const Head = () => {
             </button>
           </div>
           <Link to="/">
-            <div className="cursor-pointer my-2 ml-4">
+            <div className="cursor-pointer my-3 ml-4">
               <img
                 className="h-6"
                 alt="youtube-logo"
