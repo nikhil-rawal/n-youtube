@@ -55,7 +55,7 @@ const SidebarOpen = () => {
       <hr className="h-[0.5px] my-4 bg-neutral-800 border-0 dark:bg-gray-100 w-11/12 m-auto"></hr>
       <div className="flex flex-col">
         <div className="flex flex-row py-[12px] px-6 hover:bg-gray-200 dark:hover:bg-neutral-700 hover:rounded-xl cursor-pointer">
-          <p className="text-[18px]">You</p>
+          <p className="text-[18px] font-semibold">You</p>
           <button className="ml-2">
             <FaChevronRight className="size-4" />
           </button>
