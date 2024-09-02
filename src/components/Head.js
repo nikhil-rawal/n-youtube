@@ -14,7 +14,6 @@ import { RiVideoAddLine } from "react-icons/ri";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { LuSun } from "react-icons/lu";
-import ButtonList from "./ButtonList";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");

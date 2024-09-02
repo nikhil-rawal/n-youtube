@@ -1,5 +1,6 @@
 import React from "react";
 import { formatNumber, formatTimeAgo } from "../utils/convertValues";
+import { useSelector } from "react-redux";
 
 const VideoCard = ({
   info,
@@ -8,13 +9,20 @@ const VideoCard = ({
   customAlt,
   customBio,
 }) => {
+  const isMenuOpen = useSelector((state) => state.app.isMenuOpen);
   return (
-    <div className="flex flex-col max-w-[322px] mx-2 my-4 cursor-pointer">
+    <div
+      className={`flex flex-col max-w-[322px] mx-2 my-4 cursor-pointer ${
+        !isMenuOpen ? "max-w-[383px]" : "max-w-[325px]"
+      }`}
+    >
       <img
         className={
           (customThumbnail &&
             "rounded-2xl w-[188px] object-contain line-clamp-3") ||
-          "hover:rounded-none rounded-xl w-[322px] h-[181px] transition-all duration-300 ease-in delay-150"
+          `hover:rounded-none rounded-xl hover:transition-all hover:duration-300 hover:ease-in hover:delay-150 ${
+            !isMenuOpen ? "w-[383px] h-[215px]" : "w-[325px] h-[183px]"
+          }`
         }
         src={
           customThumbnail ||

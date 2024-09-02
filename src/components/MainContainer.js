@@ -6,12 +6,12 @@ import { openMenu } from "../utils/appSlice";
 
 const MainContainer = () => {
   const dispatch = useDispatch();
-  const checkOpen = useSelector((state) => state.app.isMenuOpen);
+  const isMenuOpen = useSelector((state) => state.app.isMenuOpen);
   useEffect(() => {
     dispatch(openMenu());
   }, []);
   return (
-    <div className={`main-container`}>
+    <div className={!isMenuOpen ? `ml-44` : undefined}>
       <div className="ml-5">
         <ButtonList />
       </div>
