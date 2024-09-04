@@ -23,7 +23,7 @@ import { GiSportMedal } from "react-icons/gi";
 
 const SidebarOpen = () => {
   return (
-    <div className="flex flex-col hover:bg-top bg-bottom pl-[2px] z-10 sidebar-open w-52 overflow-y-scroll h-full">
+    <div className="flex flex-col hover:bg-top bg-bottom pl-[2px] z-10 sidebar-open w-52  overflow-y-scroll h-full pb-24 pt-2">
       <div className="flex flex-col">
         <Link to="/">
           <div className="flex flex-row py-[12px] px-6 hover:bg-gray-200 dark:hover:bg-neutral-800 hover:rounded-xl cursor-pointer">
@@ -52,7 +52,7 @@ const SidebarOpen = () => {
           <p className="text-[14px] ml-4">YouTube Music</p>
         </div>
       </div>
-      <hr className="h-[0.5px] my-4 bg-neutral-800 border-0 dark:bg-gray-100 w-11/12 m-auto"></hr>
+      <hr className="h-[0.5px] my-4 bg-neutral-800 border-1 dark:bg-gray-100 w-11/12 m-auto"></hr>
       <div className="flex flex-col">
         <div className="flex flex-row py-[12px] px-6 hover:bg-gray-200 dark:hover:bg-neutral-700 hover:rounded-xl cursor-pointer">
           <p className="text-[18px] font-semibold">You</p>
@@ -103,7 +103,7 @@ const SidebarOpen = () => {
           <p className="text-[14px] ml-4">Liked videos</p>
         </div>
       </div>
-      <hr className="h-[0.5px] my-4 bg-neutral-800 border-0 dark:bg-gray-100 w-11/12 m-auto"></hr>
+      <hr className="h-[0.5px] my-4 bg-neutral-800 border-1 dark:bg-gray-100 w-11/12 m-auto z-50"></hr>
       <div className="flex flex-col">
         <div className="flex flex-row py-[12px] px-6 hover:bg-gray-200 dark:hover:bg-neutral-700 hover:rounded-xl cursor-pointer">
           <p className="text-[18px] font-semibold">Explore</p>
@@ -157,7 +157,7 @@ const SidebarOpen = () => {
           <p className="text-[14px] ml-4">Learning</p>
         </div>
       </div>
-      <hr className="h-[0.5px] my-4 bg-neutral-800 border-0 dark:bg-gray-100 w-11/12 m-auto"></hr>
+      <hr className="h-[1px] my-4 bg-neutral-800 border-1 dark:bg-gray-100 w-11/12 m-auto"></hr>
       <div className="flex flex-col">
         <div className="flex flex-row py-[12px] px-6 hover:bg-gray-100 dark:hover:bg-neutral-800 hover:rounded-xl cursor-pointer">
           <button>
