@@ -12,7 +12,7 @@ const MainContainer = () => {
   }, []);
   return (
     <div className={!isMenuOpen ? `ml-44` : undefined}>
-      <div className="ml-5">
+      <div className="ml-5 overflow-x-scroll">
         <ButtonList />
       </div>
       <VideoContainer />
