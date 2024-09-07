@@ -8,7 +8,7 @@ const CommentsFrame = ({ videoID }) => {
 
   const getAllComments = async () => {
     const getData = await fetch(
-      `https://corsproxy.io/?https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=_${videoID}&key=AIzaSyC1OVs3W1iYbEzdPljF-2bxp3RQDXPI3k0`
+      `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=_VB39Jo8mAQ&key=AIzaSyC1OVs3W1iYbEzdPljF-2bxp3RQDXPI3k0`
     );
     console.log("cmnt111", getData);
     const getJson = await getData.json();
