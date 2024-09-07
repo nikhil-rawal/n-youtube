@@ -9,8 +9,7 @@ export const yt_search_link =
   "https://corsproxy.io/?http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
 
 export const yt_comments_link =
-  "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=_mX7qyX7NpiM&key=" +
-  REACT_APP_YTKEY;
+  "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=";
 
 // export const yt_search_link =
 //   "https://corsproxy.io/?http://suggestqueries.google.com/complete/search?output=toolbar&hl=en&q=";
