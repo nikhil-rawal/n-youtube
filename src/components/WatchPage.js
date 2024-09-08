@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleVideoPageTrue } from "../utils/appSlice";
+import { openMenu, toggleVideoPageTrue } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import { setVideoData } from "../utils/appSlice";
 import VideoFrame from "./VideoFrame";
@@ -14,6 +14,7 @@ const WatchPage = () => {
   const bgBright = useSelector((state) => state.app.isMenuOpen);
 
   useEffect(() => {
+    dispatch(openMenu());
     dispatch(toggleVideoPageTrue());
 
     if (!videoData) {
@@ -26,7 +27,7 @@ const WatchPage = () => {
 
   const embedURL = "https://www.youtube.com/embed/" + videoId;
   return (
-    <div className={bgBright ? "flex" : `flex blur-sm brightness-75`}>
+    <div className={bgBright ? "flex" : `flex brightness-50 blur-[1px]`}>
       <VideoFrame embedURL={embedURL} videoData={videoData} />
       <CommentsFrame videoID={videoId} />
     </div>

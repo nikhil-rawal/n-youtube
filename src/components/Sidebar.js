@@ -5,8 +5,8 @@ import SidebarCollapsed from "./SidebarCollapsed";
 import SidebarOpen from "./SidebarOpen";
 
 const Sidebar = () => {
-  const isMenuOpen = useSelector((state) => state?.app?.isMenuOpen);
-  const isVideoPage = useSelector((state) => state?.app?.isVideoPage);
+  const isMenuOpen = useSelector((state) => state.app.isMenuOpen);
+  const isVideoPage = useSelector((state) => state.app.isVideoPage);
 
   if (!isMenuOpen)
     return (
