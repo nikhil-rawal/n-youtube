@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 const Body = () => {
   return (
     <div className="flex mt-16 body">
-      <div className="fixed h-screen overflow-y-scroll">
+      <div className="fixed h-screen overflow-y-scroll z-20 dark:bg-black bg-white">
         <Sidebar />
       </div>
       <div className="mt-2 ml-[50px]">

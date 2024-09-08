@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeMenu } from "../utils/appSlice";
+import { toggleVideoPageTrue } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
-import { formatNumber } from "../utils/convertValues";
 import { setVideoData } from "../utils/appSlice";
 import VideoFrame from "./VideoFrame";
 import CommentsFrame from "./CommentsFrame";
@@ -12,9 +11,10 @@ const WatchPage = () => {
   const videoId = searchParams.get("v");
   const dispatch = useDispatch();
   const videoData = useSelector((state) => state.app.videoData); //coming from appSlice - videoData
+  const bgBright = useSelector((state) => state.app.isMenuOpen);
 
   useEffect(() => {
-    dispatch(closeMenu());
+    dispatch(toggleVideoPageTrue());
 
     if (!videoData) {
       const storedVideo = JSON.parse(localStorage.getItem("videoData"));
@@ -26,10 +26,10 @@ const WatchPage = () => {
 
   const embedURL = "https://www.youtube.com/embed/" + videoId;
   return (
-    <>
+    <div className={bgBright ? "flex" : `flex blur-sm brightness-75`}>
       <VideoFrame embedURL={embedURL} videoData={videoData} />
       <CommentsFrame videoID={videoId} />
-    </>
+    </div>
   );
 };
 
