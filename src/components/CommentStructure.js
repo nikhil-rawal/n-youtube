@@ -1,31 +1,27 @@
 import React from "react";
 
 const CommentStructure = ({ comment }) => {
-  console.log(comment);
   return (
-    <div className="flex flex-col bg-slate-200 p-2 m-2 rounded-sm">
-      <div className="flex flex-row">
+    <div
+      className={`flex flex-col bg-slate-200 p-${comment?.level * 2 + 2} m-${
+        comment?.level * 2 + 2
+      } rounded-sm }`}
+    >
+      <div
+        className={`flex flex-row pl-${comment?.level * 2 + 2} ml-${
+          comment?.level * 2 + 2
+        }`}
+      >
         <img
-          src={
-            comment?.snippet?.authorProfileImageUrl ||
-            comment?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl
-          }
-          alt={`Comment by ${
-            comment?.snippet?.authorDisplayName ||
-            comment?.snippet?.topLevelComment?.snippet?.authorDisplayName
-          }`}
+          src={comment?.authorImage}
+          alt={`Comment by ${comment?.authorName}`}
           className="w-10 h-10 rounded-full"
         />
         <div className="flex flex-col px-1">
-          <span>
-            {comment?.snippet?.authorDisplayName ||
-              comment?.snippet?.topLevelComment?.snippet?.authorDisplayName}
-          </span>
+          <span>{comment?.authorName}</span>
           <span
             dangerouslySetInnerHTML={{
-              __html:
-                comment?.snippet?.textDisplay ||
-                comment?.snippet?.topLevelComment?.snippet?.textDisplay,
+              __html: comment?.authorComment,
             }}
           />
         </div>
