@@ -76,9 +76,6 @@ const Head = () => {
     console.log(json1);
   };
 
-  //comment api
-  // https://www.googleapis.com/youtube/v3/comments
-
   return (
     <div className="flex flex-col fixed top-0 left-0 right-0 bg-white dark:bg-black p-2 px-6">
       <div className="grid grid-cols-12">

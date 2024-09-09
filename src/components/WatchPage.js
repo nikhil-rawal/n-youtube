@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { setVideoData } from "../utils/appSlice";
 import VideoFrame from "./VideoFrame";
 import CommentsFrame from "./CommentsFrame";
+import RecommendedFrame from "./RecommendedFrame";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -27,9 +28,20 @@ const WatchPage = () => {
 
   const embedURL = "https://www.youtube.com/embed/" + videoId;
   return (
-    <div className={bgBright ? "flex" : `flex brightness-50 blur-[1px]`}>
-      <VideoFrame embedURL={embedURL} videoData={videoData} />
-      <CommentsFrame videoID={videoId} />
+    <div
+      className={
+        bgBright
+          ? "grid grid-cols-12 p-0 m-0"
+          : `grid grid-cols-12 brightness-50 blur-[1px] p-0 mx-0`
+      }
+    >
+      <div className="flex flex-col col-span-9">
+        <VideoFrame embedURL={embedURL} videoData={videoData} />
+        <CommentsFrame videoID={videoId} />
+      </div>
+      <div className="flex flex-col col-span-3">
+        <RecommendedFrame />
+      </div>
     </div>
   );
 };

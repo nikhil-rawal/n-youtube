@@ -30,22 +30,12 @@ const VideoCard = ({
             ? info?.snippet?.thumbnails?.maxres?.url
             : info?.snippet?.thumbnails?.high?.url)
         }
-        // src={customThumbnail || info?.snippet?.thumbnails?.maxres?.url}
         alt={customAlt || info?.snippet?.title}
       />
       <div className="m-1 pl-1 flex flex-col">
-        {/* <div className="flex flex-row"> */}
-        {/* <div>
-            <img
-              className="w-12 h-12 rounded-full"
-              src={customThumbnail || info?.snippet?.thumbnails?.maxres?.url}
-              alt={customAlt || info?.snippet?.title}
-            />
-          </div> */}
         <span className="text-md font-semibold line-clamp-2 text-ellipsis">
           {customTitle || info?.snippet?.title}
         </span>
-        {/* </div> */}
         <span className="text-sm font-normal truncate">
           {customBio || info?.snippet?.channelTitle}
         </span>
