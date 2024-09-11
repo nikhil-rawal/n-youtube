@@ -17,7 +17,7 @@ import { LuSun } from "react-icons/lu";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchSuggestions, setSearchSuggestions] = useState("");
+  const [searchSuggestions, setSearchSuggestions] = useState(null);
   // const [theme, setTheme] = useState("light");
   const inputRef = useRef(null);
   const dispatch = useDispatch();
@@ -30,8 +30,8 @@ const Head = () => {
   };
 
   const handleClickOutside = (event) => {
-    if (inputRef.current && !inputRef.current.contains(event.target)) {
-      setSearchSuggestions("");
+    if (inputRef?.current && !inputRef?.current.contains(event.target)) {
+      setSearchSuggestions(null);
     }
   };
 
@@ -40,13 +40,10 @@ const Head = () => {
     if (storedTheme) {
       dispatch(toggleTheme(storedTheme));
     }
-
     const timer = setTimeout(() => {
       const autocompleteSearches = searchFunction();
     }, 300);
-
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       clearTimeout(timer);
       document.removeEventListener("mousedown", handleClickOutside);
@@ -56,25 +53,27 @@ const Head = () => {
   useEffect(() => {
     document.body.className = themeData === "dark" ? "dark" : "light";
   }, [themeData]);
-  // const showSuggestions = () => {
-  //   searchFunction();
-  // };
+
+  useEffect(() => {
+    searchHandler();
+  }, [searchSuggestions]);
 
   // YT Search Autocomplete
   const searchFunction = async () => {
-    const data = await fetch(yt_search_link + searchQuery);
-    const json = await data.json();
+    const response = await fetch(yt_search_link + searchQuery);
+    const json = await response?.json();
     setSearchSuggestions(json[1]);
   };
 
-  // YT Search Results
-  const tryData = async () => {
-    const data1 = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=iphone&key=${REACT_APP_YTKEY}`
-    );
-    const json1 = await data1.json();
-    console.log(json1);
-  };
+  // YT Search Results --------------------------------
+
+  // const searchHandler = async () => {
+  //   const response = await fetch(
+  //     `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${}&key=${REACT_APP_YTKEY}`
+  //   );
+  //   const json = await response?.json();
+  //   console.log("Youtube Search", json);
+  // };
 
   return (
     <div className="flex flex-col fixed top-0 left-0 right-0 bg-white dark:bg-black p-2 px-6">
@@ -111,6 +110,7 @@ const Head = () => {
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              // onSubmit={()}
             />
 
             {searchQuery && (
@@ -118,7 +118,7 @@ const Head = () => {
                 className="absolute right-16 top-1/2 transform -translate-y-1/2 cursor-pointer hover:bg-gray-200  dark:hover:bg-neutral-800 rounded-full p-[6px]"
                 onClick={() => {
                   setSearchQuery("");
-                  setSearchSuggestions([]);
+                  setSearchSuggestions(null);
                 }}
               >
                 <RxCross1 className="size-5" />
