@@ -3,17 +3,21 @@ import { yt_comments_link, REACT_APP_YTKEY } from "../utils/constants";
 import CommentStructure from "./CommentStructure";
 
 const CommentsFrame = ({ videoID }) => {
-  const [comments, setComments] = useState(null);
-  const [commentsData, setCommentsData] = useState(null);
+  const [fetchedComments, setFetchedComments] = useState(null);
+  const [formattedComments, setFormattedComments] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  console.log("Fetched", fetchedComments);
+  console.log("Formatted", formattedComments);
 
   useEffect(() => {
     getAllComments();
   }, []);
 
   useEffect(() => {
-    const formatComments = (comments, level = 0) => {
-      if (comments?.items !== undefined) {
-        return comments?.items?.map((comment) => ({
+    const formatComments = (fetchedComments, level = 0) => {
+      if (fetchedComments?.items !== undefined) {
+        return fetchedComments?.items?.map((comment) => ({
           id: comment?.id,
           authorImage:
             comment?.snippet?.authorProfileImageUrl ||
@@ -29,8 +33,9 @@ const CommentsFrame = ({ videoID }) => {
             ? formatComments(comment?.replies?.comments, level + 1)
             : [],
         }));
-      } else
-        return comments?.map((comment) => ({
+      }
+      if (fetchedComments !== undefined)
+        return fetchedComments?.map((comment) => ({
           id: comment?.id,
           authorImage:
             comment?.snippet?.authorProfileImageUrl ||
@@ -48,31 +53,45 @@ const CommentsFrame = ({ videoID }) => {
         }));
     };
 
-    setCommentsData(formatComments(comments));
-  }, [comments]);
+    setFormattedComments(formatComments(fetchedComments));
+  }, [fetchedComments]);
 
   const getAllComments = async () => {
-    const data = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=10&order=relevance&videoId=${videoID}&key=${REACT_APP_YTKEY}`
-    );
-    // later on add - &maxResults=100, order=time || order=elevance,
+    try {
+      const response = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=20&order=relevance&videoId=${videoID}&key=${REACT_APP_YTKEY}`
+      );
+      // later on add - &maxResults=100, order=time || order=elevance,
 
-    const json = await data.json();
-    setComments(json);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const json = await response?.json();
+      setFetchedComments(json);
+      console.log("json", json);
+    } catch (error) {
+      console.error("Failed to fetch comments:", error);
+      setErrorMessage("Comments restricted on this video");
+    }
   };
-  console.log(commentsData);
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-row">
-        <span>{comments?.pageInfo?.totalResults} Comments</span>
+        <span>{fetchedComments?.pageInfo?.totalResults} Comments</span>
         <button>--- Sort By ---</button>
       </div>
       <input placeholder="Add a comment" />
       <hr />
       <div className="flex flex-col">
-        {commentsData?.map((comment) => (
-          <CommentStructure key={comment?.id} comment={comment} />
-        ))}
+        {errorMessage ? (
+          <div>{errorMessage}</div>
+        ) : (
+          formattedComments?.map((comment) => (
+            <CommentStructure key={comment?.id} comment={comment} />
+          ))
+        )}
       </div>
     </div>
   );
