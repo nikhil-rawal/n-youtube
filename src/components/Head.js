@@ -75,6 +75,8 @@ const Head = () => {
   // inputSearchHandler();
   // }, [searchSuggestions]);
 
+// IDEA - Select, enter > State 1 > if state 1 then state 2 (formatted) > api > populate via home screen method
+
   // YT Search Autocomplete
   const searchFunction = async () => {
     const response = await fetch(yt_search_link + searchQuery);
