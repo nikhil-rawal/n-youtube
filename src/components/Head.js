@@ -18,6 +18,7 @@ import { LuSun } from "react-icons/lu";
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState(null);
+  const [finalSearchQuery, setFinalSearchQuery] = useState("");
   // const [theme, setTheme] = useState("light");
   const inputRef = useRef(null);
   const dispatch = useDispatch();
@@ -33,6 +34,22 @@ const Head = () => {
     if (inputRef?.current && !inputRef?.current.contains(event.target)) {
       setSearchSuggestions(null);
     }
+  };
+
+  const handleInputChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    inputSearchHandler(searchQuery);
+    setFinalSearchQuery(searchQuery);
+  };
+
+  const handleClickSubmit = (query) => {
+    inputSearchHandler(query);
+    setFinalSearchQuery(query);
   };
 
   useEffect(() => {
@@ -54,9 +71,9 @@ const Head = () => {
     document.body.className = themeData === "dark" ? "dark" : "light";
   }, [themeData]);
 
-  useEffect(() => {
-    searchHandler();
-  }, [searchSuggestions]);
+  // useEffect(() => {
+  // inputSearchHandler();
+  // }, [searchSuggestions]);
 
   // YT Search Autocomplete
   const searchFunction = async () => {
@@ -67,14 +84,19 @@ const Head = () => {
 
   // YT Search Results --------------------------------
 
-  // const searchHandler = async () => {
-  //   const response = await fetch(
-  //     `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${}&key=${REACT_APP_YTKEY}`
-  //   );
-  //   const json = await response?.json();
-  //   console.log("Youtube Search", json);
-  // };
+  const inputSearchHandler = async (query) => {
+    // console.log(query);
+    // const response = await fetch(
+    //   `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=iphone&key=${REACT_APP_YTKEY}`
+    // );
+    // const json = await response?.json();
+    // console.log("Youtube Search", json);
+  };
 
+  searchQuery && searchQuery?.length > 0 && console.log(searchQuery);
+  finalSearchQuery &&
+    finalSearchQuery?.length > 0 &&
+    console.log(finalSearchQuery);
   return (
     <div className="flex flex-col fixed top-0 left-0 right-0 bg-white dark:bg-black p-2 px-6">
       <div className="grid grid-cols-12">
@@ -103,39 +125,41 @@ const Head = () => {
         </div>
         <div className="flex col-span-8 justify-center space-between">
           <div className="relative flex">
-            <input
-              ref={inputRef}
-              className="w-[550px] h-[42px] p-4 rounded-l-full border border-solid outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-black dark:border-neutral-800"
-              type="text"
-              placeholder="Search"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              // onSubmit={()}
-            />
+            <form onSubmit={handleFormSubmit} className="flex">
+              <input
+                ref={inputRef}
+                className="w-[550px] h-[42px] p-4 rounded-l-full border border-solid outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-black dark:border-neutral-800"
+                type="text"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={handleInputChange}
+              />
 
-            {searchQuery && (
-              <div
-                className="absolute right-16 top-1/2 transform -translate-y-1/2 cursor-pointer hover:bg-gray-200  dark:hover:bg-neutral-800 rounded-full p-[6px]"
-                onClick={() => {
-                  setSearchQuery("");
-                  setSearchSuggestions(null);
-                }}
-              >
-                <RxCross1 className="size-5" />
+              {searchQuery && (
+                <div
+                  className="absolute right-16 top-1/2 transform -translate-y-1/2 cursor-pointer hover:bg-gray-200  dark:hover:bg-neutral-800 rounded-full p-[6px]"
+                  onClick={() => {
+                    setSearchQuery("");
+                    setSearchSuggestions(null);
+                  }}
+                >
+                  <RxCross1 className="size-5" />
+                </div>
+              )}
+              <div className="flex items-center justify-center border h-[42px] w-14 bg-gray-50 dark:bg-gray-950 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-neutral-800 border-solid rounded-r-full">
+                <button type="submit">
+                  <CiSearch className="size-6" />
+                </button>
               </div>
-            )}
-            <div className="flex items-center justify-center border h-[42px] w-14 bg-gray-50 dark:bg-gray-950 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-neutral-800 border-solid rounded-r-full">
-              <button>
-                <CiSearch className="size-6" />
-              </button>
-            </div>
-            {searchSuggestions?.length > 0 && (
-              <div className="absolute top-full left-0 w-[550px] bg-white dark:bg-neutral-900 rounded-md shadow-black drop-shadow-lg py-2 mt-1">
+            </form>
+            {searchSuggestions?.length > 1 && (
+              <div className="absolute top-full left-0 w-[550px] bg-white dark:bg-neutral-900 rounded-md shadow-black drop-shadow-lg py-2 mt-1 cursor-default">
                 <ul className="py-2">
-                  {searchSuggestions?.map((suggestion) => (
+                  {searchSuggestions?.map((suggestion, index) => (
                     <li
                       className="pl-4 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-neutral-700 rounded border-white dark:border-neutral-900 border py-2 flex items-center"
-                      key={suggestion}
+                      key={`${index}-${suggestion}-${index}`}
+                      onClick={() => handleClickSubmit(suggestion)}
                     >
                       <CiSearch className="size-5 mr-2" />
                       {suggestion}
