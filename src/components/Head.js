@@ -15,6 +15,9 @@ import { MdOutlineNotificationsActive } from "react-icons/md";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { LuSun } from "react-icons/lu";
 
+// https://developers.google.com/youtube/v3/docs/search
+// google api for search
+
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
