@@ -17,15 +17,17 @@ import { LuSun } from "react-icons/lu";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchSuggestions, setSearchSuggestions] = useState(null);
-  const [finalSearchQuery, setFinalSearchQuery] = useState("");
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
   // const [theme, setTheme] = useState("light");
   const inputRef = useRef(null);
   const dispatch = useDispatch();
   const themeData = useSelector((state) => state.app.themeMode);
+
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
+
   const toggleThemeHandler = (mode) => {
     dispatch(toggleTheme(mode));
   };
@@ -36,21 +38,15 @@ const Head = () => {
     }
   };
 
-  const handleInputChange = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-  };
+  const handleFormSubmit = () => {};
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    inputSearchHandler(searchQuery);
-    setFinalSearchQuery(searchQuery);
-  };
+  const handleInputChange = () => {};
 
-  const handleClickSubmit = (query) => {
-    inputSearchHandler(query);
-    setFinalSearchQuery(query);
-  };
+  const handleKeyDown = () => {};
+
+  const handleKeyUp = () => {};
+
+  const handleSuggestionClick = () => {};
 
   useEffect(() => {
     const storedTheme = JSON.parse(localStorage.getItem("themeData"));
@@ -93,10 +89,6 @@ const Head = () => {
     // console.log("Youtube Search", json);
   };
 
-  searchQuery && searchQuery?.length > 0 && console.log(searchQuery);
-  finalSearchQuery &&
-    finalSearchQuery?.length > 0 &&
-    console.log(finalSearchQuery);
   return (
     <div className="flex flex-col fixed top-0 left-0 right-0 bg-white dark:bg-black p-2 px-6">
       <div className="grid grid-cols-12">
@@ -133,6 +125,8 @@ const Head = () => {
                 placeholder="Search"
                 value={searchQuery}
                 onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
+                onKeyUp={handleKeyUp}
               />
 
               {searchQuery && (
@@ -140,7 +134,7 @@ const Head = () => {
                   className="absolute right-16 top-1/2 transform -translate-y-1/2 cursor-pointer hover:bg-gray-200  dark:hover:bg-neutral-800 rounded-full p-[6px]"
                   onClick={() => {
                     setSearchQuery("");
-                    setSearchSuggestions(null);
+                    setSearchSuggestions([]);
                   }}
                 >
                   <RxCross1 className="size-5" />
@@ -157,9 +151,16 @@ const Head = () => {
                 <ul className="py-2">
                   {searchSuggestions?.map((suggestion, index) => (
                     <li
-                      className="pl-4 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-neutral-700 rounded border-white dark:border-neutral-900 border py-2 flex items-center"
+                      className={`pl-4 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-neutral-700 rounded border-white dark:border-neutral-900 border py-2 flex items-center `}
+                      /*
+                      
+                      ${
+                        index === selectedSuggestionIndex ? "bg-gray-200 dark:bg-neutral-700" : ""
+                      }
+
+                      */
                       key={`${index}-${suggestion}-${index}`}
-                      onClick={() => handleClickSubmit(suggestion)}
+                      onClick={() => handleSuggestionClick(suggestion)}
                     >
                       <CiSearch className="size-5 mr-2" />
                       {suggestion}
