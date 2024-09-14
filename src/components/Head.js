@@ -19,37 +19,13 @@ import { LuSun } from "react-icons/lu";
 // google api for search
 
 const Head = () => {
+  const [finalSearchQuery, setFinalSearchQuery] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
-  // const [theme, setTheme] = useState("light");
   const inputRef = useRef(null);
   const dispatch = useDispatch();
   const themeData = useSelector((state) => state.app.themeMode);
-
-  const toggleMenuHandler = () => {
-    dispatch(toggleMenu());
-  };
-
-  const toggleThemeHandler = (mode) => {
-    dispatch(toggleTheme(mode));
-  };
-
-  const handleClickOutside = (event) => {
-    if (inputRef?.current && !inputRef?.current.contains(event.target)) {
-      setSearchSuggestions(null);
-    }
-  };
-
-  const handleFormSubmit = () => {};
-
-  const handleInputChange = () => {};
-
-  const handleKeyDown = () => {};
-
-  const handleKeyUp = () => {};
-
-  const handleSuggestionClick = () => {};
 
   useEffect(() => {
     const storedTheme = JSON.parse(localStorage.getItem("themeData"));
@@ -70,11 +46,52 @@ const Head = () => {
     document.body.className = themeData === "dark" ? "dark" : "light";
   }, [themeData]);
 
-  // useEffect(() => {
-  // inputSearchHandler();
-  // }, [searchSuggestions]);
+  const toggleMenuHandler = () => {
+    dispatch(toggleMenu());
+  };
 
-// IDEA - Select, enter > State 1 > if state 1 then state 2 (formatted) > api > populate via home screen method
+  const toggleThemeHandler = (mode) => {
+    dispatch(toggleTheme(mode));
+  };
+
+  const handleClickOutside = (event) => {
+    if (inputRef?.current && !inputRef?.current.contains(event.target)) {
+      setSearchSuggestions(null);
+    }
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setFinalSearchQuery(searchQuery);
+    inputSearchHandler(finalSearchQuery);
+  };
+
+  const handleInputChange = (e) => {
+    setSearchQuery(e.target.value);
+    // searchFunction(e.target.value)
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowDown") {
+      setSelectedSuggestionIndex((prevIndex) =>
+        Math.min(prevIndex + 1, searchSuggestions?.length - 1)
+      );
+    } else if (e.key === "ArrowUp") {
+      setSelectedSuggestionIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    } else if (e.key === "Enter") {
+      if (selectedSuggestionIndex >= 0) {
+        setSearchQuery(searchSuggestions[selectedSuggestionIndex]);
+        // } else {
+        //   inputSearchHandler(searchQuery);
+        // }
+      }
+    }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setSearchQuery(suggestion);
+    setFinalSearchQuery(searchQuery);
+  };
 
   // YT Search Autocomplete
   const searchFunction = async () => {
@@ -86,7 +103,7 @@ const Head = () => {
   // YT Search Results --------------------------------
 
   const inputSearchHandler = async (query) => {
-    // console.log(query);
+    console.log(query);
     // const response = await fetch(
     //   `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=iphone&key=${REACT_APP_YTKEY}`
     // );
@@ -131,7 +148,6 @@ const Head = () => {
                 value={searchQuery}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
-                onKeyUp={handleKeyUp}
               />
 
               {searchQuery && (
@@ -139,6 +155,7 @@ const Head = () => {
                   className="absolute right-16 top-1/2 transform -translate-y-1/2 cursor-pointer hover:bg-gray-200  dark:hover:bg-neutral-800 rounded-full p-[6px]"
                   onClick={() => {
                     setSearchQuery("");
+                    setFinalSearchQuery("");
                     setSearchSuggestions([]);
                   }}
                 >
@@ -151,21 +168,19 @@ const Head = () => {
                 </button>
               </div>
             </form>
-            {searchSuggestions?.length > 1 && (
+            {searchSuggestions?.length > 0 && (
               <div className="absolute top-full left-0 w-[550px] bg-white dark:bg-neutral-900 rounded-md shadow-black drop-shadow-lg py-2 mt-1 cursor-default">
                 <ul className="py-2">
                   {searchSuggestions?.map((suggestion, index) => (
                     <li
-                      className={`pl-4 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-neutral-700 rounded border-white dark:border-neutral-900 border py-2 flex items-center `}
-                      /*
-                      
-                      ${
-                        index === selectedSuggestionIndex ? "bg-gray-200 dark:bg-neutral-700" : ""
-                      }
-
-                      */
+                      className={`pl-4 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-neutral-700 rounded border-white dark:border-neutral-900 border py-2 flex items-center ${
+                        index === selectedSuggestionIndex
+                          ? "bg-gray-200 dark:bg-neutral-700"
+                          : ""
+                      }`}
                       key={`${index}-${suggestion}-${index}`}
                       onClick={() => handleSuggestionClick(suggestion)}
+                      onMouseOver={() => handleSuggestionClick(suggestion)}
                     >
                       <CiSearch className="size-5 mr-2" />
                       {suggestion}
@@ -218,3 +233,125 @@ const Head = () => {
 };
 
 export default Head;
+
+/*
+
+import React, { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { RxCross1 } from 'react-icons/rx';
+import { CiSearch } from 'react-icons/ci';
+
+const SearchComponent = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
+  const inputRef = useRef(null);
+  const dispatch = useDispatch();
+
+  // Handle form submission
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    inputSearchHandler(searchQuery);
+  };
+
+  // Handle input change
+  const handleInputChange = (e) => {
+    setSearchQuery(e.target.value);
+    searchFunction(e.target.value);
+  };
+
+  // Handle key down events for navigation and selection
+  const handleKeyDown = (e) => {
+    if (e.key === 'ArrowDown') {
+      setSelectedSuggestionIndex((prevIndex) => Math.min(prevIndex + 1, searchSuggestions.length - 1));
+    } else if (e.key === 'ArrowUp') {
+      setSelectedSuggestionIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    } else if (e.key === 'Enter') {
+      if (selectedSuggestionIndex >= 0) {
+        inputSearchHandler(searchSuggestions[selectedSuggestionIndex]);
+      } else {
+        inputSearchHandler(searchQuery);
+      }
+    }
+  };
+
+  // Handle key up events (optional, if needed)
+  const handleKeyUp = (e) => {
+    // Additional logic can be added here if needed
+  };
+
+  // Handle suggestion click
+  const handleSuggestionClick = (suggestion) => {
+    inputSearchHandler(suggestion);
+  };
+
+  // Fetch search suggestions
+  const searchFunction = async (query) => {
+    const response = await fetch(`yt_search_link${query}`);
+    const json = await response.json();
+    setSearchSuggestions(json[1]);
+  };
+
+  // Handle search input and send to API
+  const inputSearchHandler = async (inputQuery) => {
+    // Dispatch or handle the search query as needed
+    console.log("Search Query:", inputQuery);
+    // Example: dispatch(searchAction(inputQuery));
+  };
+
+  return (
+    <div className="relative flex">
+      <form onSubmit={handleFormSubmit} className="flex">
+        <input
+          ref={inputRef}
+          className="w-[550px] h-[42px] p-4 rounded-l-full border border-solid outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-black dark:border-neutral-800"
+          type="text"
+          placeholder="Search"
+          value={searchQuery}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
+        />
+
+        {searchQuery && (
+          <div
+            className="absolute right-16 top-1/2 transform -translate-y-1/2 cursor-pointer hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-full p-[6px]"
+            onClick={() => {
+              setSearchQuery("");
+              setSearchSuggestions([]);
+            }}
+          >
+            <RxCross1 className="size-5" />
+          </div>
+        )}
+        <div className="flex items-center justify-center border h-[42px] w-14 bg-gray-50 dark:bg-gray-950 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-neutral-800 border-solid rounded-r-full">
+          <button type="submit">
+            <CiSearch className="size-6" />
+          </button>
+        </div>
+      </form>
+      {searchSuggestions?.length > 1 && (
+        <div className="absolute top-full left-0 w-[550px] bg-white dark:bg-neutral-900 rounded-md shadow-black drop-shadow-lg py-2 mt-1 cursor-default">
+          <ul className="py-2">
+            {searchSuggestions?.map((suggestion, index) => (
+              <li
+                className={`pl-4 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-neutral-700 rounded border-white dark:border-neutral-900 border py-2 flex items-center ${
+                  index === selectedSuggestionIndex ? "bg-gray-200 dark:bg-neutral-700" : ""
+                }`}
+                key={`${index}-${suggestion}-${index}`}
+                onClick={() => handleSuggestionClick(suggestion)}
+              >
+                <CiSearch className="size-5 mr-2" />
+                {suggestion}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SearchComponent;
+
+*/
