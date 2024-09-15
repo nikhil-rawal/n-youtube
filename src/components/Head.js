@@ -2,10 +2,8 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { Link } from "react-router-dom";
-import { yt_search_link } from "../utils/constants";
-import { REACT_APP_YTKEY } from "../utils/constants";
+import { REACT_APP_YTKEY, yt_inputSearch_link } from "../utils/constants";
 import { toggleTheme } from "../utils/appSlice";
-
 import { SlMenu } from "react-icons/sl";
 import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
@@ -27,7 +25,18 @@ const Head = () => {
   const handleClickOutsideRef = useRef();
   const dispatch = useDispatch();
   const themeData = useSelector((state) => state.app.themeMode);
-  const [forceRender, setForceRender] = useState(false);
+
+  // Handling click outside input bar
+  const handleClickOutside = useCallback(
+    (event) => {
+      if (searchSuggestions?.length > 0) {
+        if (inputRef?.current && !inputRef?.current.contains(event.target)) {
+          setSearchSuggestions([]);
+        }
+      }
+    },
+    [searchSuggestions]
+  );
 
   useEffect(() => {
     const storedTheme = JSON.parse(localStorage.getItem("themeData"));
@@ -39,7 +48,7 @@ const Head = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutsideRef.current);
     };
-  }, [dispatch]);
+  }, [dispatch, handleClickOutside]);
 
   useEffect(() => {
     document.body.className = themeData === "dark" ? "dark" : "light";
@@ -52,10 +61,27 @@ const Head = () => {
         getSearchSuggestions(inputValue);
       }, 300);
       return () => clearTimeout(timer);
-    } else {
+    } else if (!inputValue) {
       setSearchSuggestions([]);
     }
   }, [inputValue]);
+
+  // Handling search input and sending to API
+  const inputSearchHandler = useCallback(async (searchQuery) => {
+    if (searchQuery) {
+      const inputSearchURL = yt_inputSearch_link(searchQuery, REACT_APP_YTKEY);
+      const response = await fetch(inputSearchURL);
+      const json = response?.json();
+      console.log("Youtube Search", json);
+    }
+  }, []);
+
+  // inputSearchHandler only when searchQuery updated
+  useEffect(() => {
+    if (searchQuery) {
+      inputSearchHandler(searchQuery);
+    }
+  }, [searchQuery, inputSearchHandler]);
 
   // Toggle Menu Open Close
   const toggleMenuHandler = () => {
@@ -67,21 +93,14 @@ const Head = () => {
     dispatch(toggleTheme(mode));
   };
 
-  // Handling click outside input bar
-  const handleClickOutside = (event) => {
-    if (inputRef?.current && !inputRef?.current.contains(event.target)) {
-      setSearchSuggestions([]);
-    }
-  };
-
   // Handling input form submission
   const submitFormHandler = useCallback(
     (e) => {
       if (inputValue) {
         e.preventDefault();
         setSearchQuery(inputValue);
-        setSearchSuggestions([]);
         setInputValue("");
+        setSearchSuggestions([]);
       }
     },
     [inputValue]
@@ -109,6 +128,7 @@ const Head = () => {
     } else if (e.key === "Enter") {
       if (selectedSuggestionIndex >= 0) {
         setInputValue(searchSuggestions[selectedSuggestionIndex]);
+        setSearchQuery(inputValue);
         setSearchSuggestions([]);
         setSelectedSuggestionIndex(-1);
       } else {
@@ -131,24 +151,12 @@ const Head = () => {
   };
 
   // Handling click on li suggestions
-  function handleSuggestionClick(suggestion, e) {
-    console.log("searchSuggestions at render:", searchSuggestions);
+  function handleSuggestionClick(suggestion, index) {
+    console.log("handleSuggestionClick", suggestion, index);
     setInputValue(suggestion);
+    setSearchQuery(inputValue);
     setSearchSuggestions([]);
-    // setForceRender((prev) => !prev);
-    console.log("Current Suggestion", suggestion);
   }
-
-  // Handling search input and sending to API
-  const inputSearchHandler = async (query) => {
-    console.log(query);
-  };
-
-  // const response = await fetch(
-  //   `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=iphone&key=${REACT_APP_YTKEY}`
-  // );
-  // const json = await response?.json();
-  // console.log("Youtube Search", json);
 
   useEffect(() => {
     console.log("inputValue", inputValue);
@@ -160,9 +168,6 @@ const Head = () => {
     console.log("searchSuggestions", searchSuggestions);
   }, [searchSuggestions]);
 
-  const checkFnFn = () => {
-    console.log("first");
-  };
   return (
     <div className="flex flex-col fixed top-0 left-0 right-0 bg-white dark:bg-black p-2 px-6">
       <div className="grid grid-cols-12">
@@ -219,8 +224,13 @@ const Head = () => {
                 </button>
               </div>
             </form>
-            {searchSuggestions?.length > 0 && (
-              <div className="absolute top-full left-0 w-[550px] bg-white dark:bg-neutral-900 rounded-md shadow-black drop-shadow-lg py-2 mt-1 cursor-default">
+            {
+              <div
+                className="absolute top-full left-0 w-[550px] bg-white dark:bg-neutral-900 rounded-md shadow-black drop-shadow-lg py-2 mt-1 cursor-default z-10"
+                onClick={(event) => {
+                  console.log("Parent 11 clicked");
+                }}
+              >
                 <ul
                   className="py-2"
                   role="listbox"
@@ -228,7 +238,7 @@ const Head = () => {
                 >
                   {searchSuggestions?.map((suggestion, index) => (
                     <li
-                      className={`pl-4 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-neutral-700 rounded border-white dark:border-neutral-900 border py-2 flex items-center ${
+                      className={`pl-4 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-neutral-700 rounded border-white dark:border-neutral-900 border py-2 flex items-center z-20 ${
                         index === selectedSuggestionIndex
                           ? "bg-gray-200 dark:bg-neutral-700"
                           : ""
@@ -236,21 +246,22 @@ const Head = () => {
                       key={`${index}-${suggestion}-${index}`}
                       role="option"
                       aria-selected={index === selectedSuggestionIndex}
-                      // onClick={checkFnFn}
-                      // onClick={(e) => handleSuggestionClick(suggestion, e)}
+                      onClick={() => console.log(suggestion, index)}
+                      // onClick={() => handleSuggestionClick(suggestion, index)}
                     >
-                      <button
+                      {/* <button
                         className="flex"
-                        onClick={(e) => handleSuggestionClick(suggestion, e)}
-                      >
-                        <CiSearch className="size-5 mr-2" />
-                        {suggestion}
-                      </button>
+                        onClick={() => console.log(suggestion, index)}
+                        // onClick={() => handleSuggestionClick(suggestion, index)}
+                      > */}
+                      <CiSearch className="size-5 mr-2" />
+                      {suggestion}
+                      {/* </button> */}
                     </li>
                   ))}
                 </ul>
               </div>
-            )}
+            }
           </div>
           <div className="ml-2 bg-gray-100 dark:bg-neutral-900 hover:bg-gray-200 dark:hover:bg-neutral-800 cursor-pointer w-11 h-11 p-2 rounded-full flex items-center justify-center">
             <button>
@@ -295,14 +306,3 @@ const Head = () => {
 };
 
 export default Head;
-
-/**
- * 
- * ${
-                        index === selectedSuggestionIndex
-                          ? "bg-gray-200 dark:bg-neutral-700"
-                          : ""
-                      }
-
-                      
- */
