@@ -59,7 +59,7 @@ const Head = () => {
     if (inputValue) {
       const timer = setTimeout(() => {
         getSearchSuggestions(inputValue);
-      }, 300);
+      }, 350);
       return () => clearTimeout(timer);
     } else if (!inputValue) {
       setSearchSuggestions([]);
@@ -152,11 +152,15 @@ const Head = () => {
 
   // Handling click on li suggestions
   function handleSuggestionClick(suggestion, index) {
-    console.log("handleSuggestionClick", suggestion, index);
     setInputValue(suggestion);
     setSearchQuery(inputValue);
     setSearchSuggestions([]);
   }
+
+  //HandleSuggestion onMouseOver
+  const handleSuggestionOver = useCallback((suggestion) => {
+    setInputValue(suggestion);
+  }, []);
 
   useEffect(() => {
     console.log("inputValue", inputValue);
@@ -224,15 +228,10 @@ const Head = () => {
                 </button>
               </div>
             </form>
-            {
-              <div
-                className="absolute top-full left-0 w-[550px] bg-white dark:bg-neutral-900 rounded-md shadow-black drop-shadow-lg py-2 mt-1 cursor-default z-10"
-                onClick={(event) => {
-                  console.log("Parent 11 clicked");
-                }}
-              >
+            {searchSuggestions?.length > 0 && (
+              <div className="absolute top-full left-0 w-[550px] bg-white dark:bg-neutral-900 rounded-md shadow-black drop-shadow-lg py-2 mt-1 cursor-default">
                 <ul
-                  className="py-2"
+                  className="py-2 z-10"
                   role="listbox"
                   aria-label="Search Suggestions"
                 >
@@ -246,13 +245,19 @@ const Head = () => {
                       key={`${index}-${suggestion}-${index}`}
                       role="option"
                       aria-selected={index === selectedSuggestionIndex}
-                      onClick={() => console.log(suggestion, index)}
+                      // onClick={() => console.log(suggestion, index)}
                       // onClick={() => handleSuggestionClick(suggestion, index)}
+                      // onClick={() => setSearchQuery(suggestion)}
+
+                      onMouseOver={() =>
+                        handleSuggestionOver(suggestion, index)
+                      }
                     >
                       {/* <button
                         className="flex"
-                        onClick={() => console.log(suggestion, index)}
-                        // onClick={() => handleSuggestionClick(suggestion, index)}
+                        // onClick={() => console.log(suggestion, index)}
+                        // onClick={() => console.log(suggestion, index)}
+                        onClick={() => handleSuggestionClick(suggestion, index)}
                       > */}
                       <CiSearch className="size-5 mr-2" />
                       {suggestion}
@@ -261,7 +266,7 @@ const Head = () => {
                   ))}
                 </ul>
               </div>
-            }
+            )}
           </div>
           <div className="ml-2 bg-gray-100 dark:bg-neutral-900 hover:bg-gray-200 dark:hover:bg-neutral-800 cursor-pointer w-11 h-11 p-2 rounded-full flex items-center justify-center">
             <button>
