@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { REACT_APP_YTKEY, yt_inputSearch_link } from "../utils/constants";
 import { toggleTheme } from "../utils/appSlice";
 import { SlMenu } from "react-icons/sl";
@@ -25,6 +25,7 @@ const Head = () => {
   const handleClickOutsideRef = useRef();
   const dispatch = useDispatch();
   const themeData = useSelector((state) => state.app.themeMode);
+  const navigate = useNavigate();
 
   // Handling click outside input bar
   const handleClickOutside = useCallback(
@@ -67,14 +68,32 @@ const Head = () => {
   }, [inputValue]);
 
   // Handling search input and sending to API
-  const inputSearchHandler = useCallback(async (searchQuery) => {
-    if (searchQuery) {
-      const inputSearchURL = yt_inputSearch_link(searchQuery, REACT_APP_YTKEY);
-      const response = await fetch(inputSearchURL);
-      const json = response?.json();
-      console.log("Youtube Search", json);
-    }
-  }, []);
+  const inputSearchHandler = useCallback(
+    async (searchQuery) => {
+      try {
+        if (searchQuery) {
+          const inputSearchURL = yt_inputSearch_link(
+            searchQuery,
+            REACT_APP_YTKEY
+          );
+          const response = await fetch(inputSearchURL);
+          const json = response?.json();
+          console.log("Youtube Search", json);
+
+          //Navigate to new page with search results
+          navigate(
+            `/results?search_query=${searchQuery.replace(/\s+/g, "+")}`,
+            {
+              state: { query: searchQuery, results: JSON.stringify(json) },
+            }
+          );
+        }
+      } catch (error) {
+        console.error("Error Fetching search results");
+      }
+    },
+    [navigate]
+  );
 
   // inputSearchHandler only when searchQuery updated
   useEffect(() => {
@@ -151,26 +170,26 @@ const Head = () => {
   };
 
   // Handling click on li suggestions
-  function handleSuggestionClick(suggestion, index) {
-    setInputValue(suggestion);
-    setSearchQuery(inputValue);
-    setSearchSuggestions([]);
-  }
+  // function handleSuggestionClick(suggestion, index) {
+  //   setInputValue(suggestion);
+  //   setSearchQuery(inputValue);
+  //   setSearchSuggestions([]);
+  // }
 
   //HandleSuggestion onMouseOver
   const handleSuggestionOver = useCallback((suggestion) => {
     setInputValue(suggestion);
   }, []);
 
-  useEffect(() => {
-    console.log("inputValue", inputValue);
-  }, [inputValue]);
-  useEffect(() => {
-    console.log("searchQuery", searchQuery);
-  }, [searchQuery]);
-  useEffect(() => {
-    console.log("searchSuggestions", searchSuggestions);
-  }, [searchSuggestions]);
+  // useEffect(() => {
+  //   console.log("inputValue", inputValue);
+  // }, [inputValue]);
+  // useEffect(() => {
+  //   console.log("searchQuery", searchQuery);
+  // }, [searchQuery]);
+  // useEffect(() => {
+  //   console.log("searchSuggestions", searchSuggestions);
+  // }, [searchSuggestions]);
 
   return (
     <div className="flex flex-col fixed top-0 left-0 right-0 bg-white dark:bg-black p-2 px-6">
