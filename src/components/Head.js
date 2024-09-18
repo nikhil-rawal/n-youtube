@@ -77,9 +77,7 @@ const Head = () => {
             REACT_APP_YTKEY
           );
           const response = await fetch(inputSearchURL);
-          const json = response?.json();
-          console.log("Youtube Search", json);
-
+          const json = await response?.json();
           //Navigate to new page with search results
           navigate(
             `/results?search_query=${searchQuery.replace(/\s+/g, "+")}`,
