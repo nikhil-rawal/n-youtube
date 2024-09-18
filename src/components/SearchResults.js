@@ -1,5 +1,8 @@
 import React, { useCallback, useState, useEffect, useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import ResultsVideoCard from "./ResultsVideoCard";
+import { setVideoData } from "../utils/appSlice";
+import { useDispatch } from "react-redux";
 
 const SearchResults = React.memo(() => {
   const [searchResults, setSearchResults] = useState([]);
@@ -8,18 +11,30 @@ const SearchResults = React.memo(() => {
   const parsedResults = useMemo(() => {
     return results ? JSON.parse(results) : null;
   }, [results]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("useffect");
     if (parsedResults) {
-      console.log("parsing");
       setSearchResults(parsedResults);
     }
   }, [parsedResults]);
 
+  console.log(searchResults?.items?.map);
   return (
-    <div className="ml-20">
-      <h1>Search Results for: {query}</h1>
+    <div className="flex flex-wrap m-2 p-2">
+      {searchResults?.length > 1 &&
+        searchResults?.map((searchedVideoItem) => (
+          <Link
+            to={`/WatchPage?v=${searchedVideoItem?.id?.videoId}`}
+            key={searchedVideoItem?.id?.videoId}
+            onClick={() => dispatch(setVideoData(searchedVideoItem))} //sending data to appSlice - videoData
+          >
+            <ResultsVideoCard
+              info={searchedVideoItem}
+              key={searchedVideoItem?.id?.videoId}
+            />
+          </Link>
+        ))}
     </div>
   );
 });
