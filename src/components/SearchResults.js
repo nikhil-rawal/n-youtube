@@ -2,7 +2,9 @@ import React, { useCallback, useState, useEffect, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ResultsVideoCard from "./ResultsVideoCard";
 import { setVideoData } from "../utils/appSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ButtonList from "./ButtonList";
+import VideoContainer from "./VideoContainer";
 
 const SearchResults = React.memo(() => {
   const [searchResults, setSearchResults] = useState([]);
@@ -12,6 +14,7 @@ const SearchResults = React.memo(() => {
     return results ? JSON.parse(results) : null;
   }, [results]);
   const dispatch = useDispatch();
+  const isMenuOpen = useSelector((state) => state.app.isMenuOpen);
 
   useEffect(() => {
     if (parsedResults) {
@@ -19,10 +22,16 @@ const SearchResults = React.memo(() => {
     }
   }, [parsedResults]);
 
-  console.log(searchResults?.items?.map);
+  console.log(searchResults?.items);
   return (
-    <div className="flex flex-wrap m-2 p-2">
-      {searchResults?.length > 1 &&
+    <div className={!isMenuOpen ? `ml-44` : undefined}>
+      <div className="ml-5 overflow-x-scroll">
+        <ButtonList />
+      </div>
+      <VideoContainer />
+    </div>
+    // <div className={!isMenuOpen ? `ml-44` : undefined}>
+    /* {searchResults?.length > 1 &&
         searchResults?.map((searchedVideoItem) => (
           <Link
             to={`/WatchPage?v=${searchedVideoItem?.id?.videoId}`}
@@ -34,8 +43,8 @@ const SearchResults = React.memo(() => {
               key={searchedVideoItem?.id?.videoId}
             />
           </Link>
-        ))}
-    </div>
+        ))} */
+    // </div>
   );
 });
 
