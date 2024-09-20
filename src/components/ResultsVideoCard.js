@@ -10,12 +10,23 @@ const ResultsVideoCard = ({
   customBio,
 }) => {
   const isMenuOpen = useSelector((state) => state.app.isMenuOpen);
+
+  const changeImageURL = (currentImageURL) => {
+    return (
+      currentImageURL?.replaceAll("hqdefault", "maxresdefault") || undefined
+    );
+  };
+
+  const imageUrl =
+    customThumbnail ||
+    info?.snippet?.thumbnails?.maxres?.url ||
+    changeImageURL(info?.snippet?.thumbnails?.high?.url) ||
+    info?.snippet?.thumbnails?.high?.url;
+
+  console.log("URL", changeImageURL(info?.snippet?.thumbnails?.high?.url));
+  //   console.log(changeImage())
   return (
-    <div
-      className={`flex flex-col max-w-[322px] mx-2 my-4 cursor-pointer ${
-        !isMenuOpen ? "max-w-[383px]" : "max-w-[325px]"
-      }`}
-    >
+    <div className={`flex mx-2 my-4 cursor-pointer}`}>
       <img
         className={
           (customThumbnail &&
@@ -24,12 +35,7 @@ const ResultsVideoCard = ({
             !isMenuOpen ? "w-[383px] h-[215px]" : "w-[325px] h-[183px]"
           }`
         }
-        src={
-          customThumbnail ||
-          (info?.snippet?.thumbnails?.maxres?.url
-            ? info?.snippet?.thumbnails?.maxres?.url
-            : info?.snippet?.thumbnails?.high?.url)
-        }
+        src={imageUrl}
         alt={customAlt || info?.snippet?.title}
       />
       <div className="m-1 pl-1 flex flex-col">

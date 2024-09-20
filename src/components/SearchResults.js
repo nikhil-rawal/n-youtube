@@ -5,6 +5,7 @@ import { setVideoData } from "../utils/appSlice";
 import { useDispatch, useSelector } from "react-redux";
 import VideoContainer from "./VideoContainer";
 import { openMenu, toggleVideoPageFalse } from "../utils/appSlice";
+import ButtonList from "./ButtonList";
 
 // slice for menu.then ml-44 || undefined.then populate results
 
@@ -31,8 +32,23 @@ const SearchResults = React.memo(() => {
 
   console.log(searchResults?.items);
   return (
-    <div className={!isMenuOpen ? `ml-44` : undefined}>
-      <VideoContainer />
+    <div className={!isMenuOpen ? `ml-44` : `ml-12`}>
+      <div className="ml-5 overflow-x-scroll">
+        <ButtonList />
+      </div>
+      {searchResults?.items?.length > 1 &&
+        searchResults?.items?.map((searchedVideoItem) => (
+          <Link
+            to={`/WatchPage?v=${searchedVideoItem?.id?.videoId}`}
+            key={searchedVideoItem?.id?.videoId}
+            onClick={() => dispatch(setVideoData(searchedVideoItem))} //sending data to appSlice - videoData
+          >
+            <ResultsVideoCard
+              info={searchedVideoItem}
+              key={searchedVideoItem?.id?.videoId}
+            />
+          </Link>
+        ))}{" "}
     </div>
     // <div className={!isMenuOpen ? `ml-44` : undefined}>
     /* {searchResults?.length > 1 &&
