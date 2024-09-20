@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import VideoContainer from "./VideoContainer";
 import { openMenu, toggleVideoPageFalse } from "../utils/appSlice";
 
+// slice for menu.then ml-44 || undefined.then populate results
+
 const SearchResults = React.memo(() => {
   const [searchResults, setSearchResults] = useState([]);
   const location = useLocation();
