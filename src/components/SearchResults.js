@@ -3,8 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import ResultsVideoCard from "./ResultsVideoCard";
 import { setVideoData } from "../utils/appSlice";
 import { useDispatch, useSelector } from "react-redux";
-import ButtonList from "./ButtonList";
 import VideoContainer from "./VideoContainer";
+import { openMenu, toggleVideoPageFalse } from "../utils/appSlice";
 
 const SearchResults = React.memo(() => {
   const [searchResults, setSearchResults] = useState([]);
@@ -22,12 +22,14 @@ const SearchResults = React.memo(() => {
     }
   }, [parsedResults]);
 
+  useEffect(() => {
+    dispatch(openMenu());
+    dispatch(toggleVideoPageFalse());
+  }, []);
+
   console.log(searchResults?.items);
   return (
     <div className={!isMenuOpen ? `ml-44` : undefined}>
-      <div className="ml-5 overflow-x-scroll">
-        <ButtonList />
-      </div>
       <VideoContainer />
     </div>
     // <div className={!isMenuOpen ? `ml-44` : undefined}>

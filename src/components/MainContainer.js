@@ -7,10 +7,12 @@ import { openMenu, toggleVideoPageFalse } from "../utils/appSlice";
 const MainContainer = () => {
   const dispatch = useDispatch();
   const isMenuOpen = useSelector((state) => state.app.isMenuOpen);
+
   useEffect(() => {
     dispatch(openMenu());
     dispatch(toggleVideoPageFalse());
   }, []);
+
   return (
     <div className={!isMenuOpen ? `ml-44` : undefined}>
       <div className="ml-5 overflow-x-scroll">
