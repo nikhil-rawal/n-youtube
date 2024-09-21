@@ -36,6 +36,23 @@ const SearchResults = React.memo(() => {
       <div className="ml-5 overflow-x-scroll">
         <ButtonList />
       </div>
+      {/* {
+        <>
+          <a
+            href="https://github.com/nikhil-rawal"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <AdCard
+              key={userData?.id}
+              customTitle={userData?.name}
+              customThumbnail={userData?.avatar_url}
+              customAlt={userData?.login}
+              customBio={userData?.bio}
+            />
+          </a>
+        </>
+      } */}
       {searchResults?.items?.length > 1 &&
         searchResults?.items?.map((searchedVideoItem) => (
           <Link
@@ -50,21 +67,6 @@ const SearchResults = React.memo(() => {
           </Link>
         ))}{" "}
     </div>
-    // <div className={!isMenuOpen ? `ml-44` : undefined}>
-    /* {searchResults?.length > 1 &&
-        searchResults?.map((searchedVideoItem) => (
-          <Link
-            to={`/WatchPage?v=${searchedVideoItem?.id?.videoId}`}
-            key={searchedVideoItem?.id?.videoId}
-            onClick={() => dispatch(setVideoData(searchedVideoItem))} //sending data to appSlice - videoData
-          >
-            <ResultsVideoCard
-              info={searchedVideoItem}
-              key={searchedVideoItem?.id?.videoId}
-            />
-          </Link>
-        ))} */
-    // </div>
   );
 });
 

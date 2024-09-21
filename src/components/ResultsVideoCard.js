@@ -17,16 +17,16 @@ const ResultsVideoCard = ({
     );
   };
 
-  const imageUrl =
-    customThumbnail ||
-    info?.snippet?.thumbnails?.maxres?.url ||
-    changeImageURL(info?.snippet?.thumbnails?.high?.url) ||
-    info?.snippet?.thumbnails?.high?.url;
+  const imageUrl = customThumbnail
+    ? customThumbnail
+    : info?.snippet?.thumbnails?.maxres?.url
+    ? info?.snippet?.thumbnails?.maxres?.url
+    : changeImageURL(info?.snippet?.thumbnails?.high?.url)
+    ? changeImageURL(info?.snippet?.thumbnails?.high?.url)
+    : info?.snippet?.thumbnails?.high?.url;
 
-  console.log("URL", changeImageURL(info?.snippet?.thumbnails?.high?.url));
-  //   console.log(changeImage())
   return (
-    <div className={`flex mx-2 my-4 cursor-pointer}`}>
+    <div className={`flex mx-2 my-8 cursor-pointer}`}>
       <img
         className={
           (customThumbnail &&
