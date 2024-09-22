@@ -17,6 +17,11 @@ const ResultsVideoCard = ({
     );
   };
 
+// from here, results go to ResultsFrame, then repopulate
+// same case with Comment, get results, send to CommentsFrame, then repopulate
+// also change async methods for comments
+// change styling
+
   const imageUrl = customThumbnail
     ? customThumbnail
     : info?.snippet?.thumbnails?.maxres?.url
