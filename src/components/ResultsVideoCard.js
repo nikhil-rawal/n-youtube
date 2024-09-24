@@ -37,7 +37,7 @@ const ResultsVideoCard = ({
     : info?.snippet?.thumbnails?.high?.url;
 
   return (
-    <div className="flex flex-row w-11/12">
+    <div className="flex flex-row w-11/12 ">
       <div className="cursor-pointer m-1 p-1">
         <Link
           to={`/WatchPage?v=${info?.id?.videoId}`}
@@ -48,7 +48,7 @@ const ResultsVideoCard = ({
             className={
               (customThumbnail &&
                 "rounded-2xl w-[188px] object-contain line-clamp-3") ||
-              `hover:rounded-none rounded-xl hover:transition-all hover:duration-300 hover:ease-in hover:delay-150 w-[500px]`
+              `hover:rounded-none rounded-xl hover:transition-all hover:duration-300 hover:ease-in hover:delay-150 min-w-[500px] max-w-[500px] w-[500px]`
             }
             src={imageUrl}
             alt={customAlt || info?.snippet?.title}
@@ -88,7 +88,6 @@ const ResultsVideoCard = ({
           </span>
         )}
       </div>
-      <CiMenuKebab />
     </div>
   );
 };
