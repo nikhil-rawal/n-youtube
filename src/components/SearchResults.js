@@ -55,17 +55,11 @@ const SearchResults = React.memo(() => {
       } */}
       {searchResults?.items?.length > 1 &&
         searchResults?.items?.map((searchedVideoItem) => (
-          <Link
-            to={`/WatchPage?v=${searchedVideoItem?.id?.videoId}`}
+          <ResultsVideoCard
+            info={searchedVideoItem}
             key={searchedVideoItem?.id?.videoId}
-            onClick={() => dispatch(setVideoData(searchedVideoItem))} //sending data to appSlice - videoData
-          >
-            <ResultsVideoCard
-              info={searchedVideoItem}
-              key={searchedVideoItem?.id?.videoId}
-            />
-          </Link>
-        ))}{" "}
+          />
+        ))}
     </div>
   );
 });

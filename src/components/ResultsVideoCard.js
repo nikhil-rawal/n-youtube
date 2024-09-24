@@ -1,6 +1,10 @@
 import React from "react";
 import { formatNumber, formatTimeAgo } from "../utils/convertValues";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setVideoData } from "../utils/appSlice";
+import { CiMenuKebab } from "react-icons/ci";
 
 const ResultsVideoCard = ({
   info,
@@ -17,10 +21,12 @@ const ResultsVideoCard = ({
     );
   };
 
-// from here, results go to ResultsFrame, then repopulate
-// same case with Comment, get results, send to CommentsFrame, then repopulate
-// also change async methods for comments
-// change styling
+  // from here, results go to ResultsFrame, then repopulate
+  // same case with Comment, get results, send to CommentsFrame, then repopulate
+  // also change async methods for comments
+  // change styling
+
+  const dispatch = useDispatch();
 
   const imageUrl = customThumbnail
     ? customThumbnail
@@ -31,23 +37,39 @@ const ResultsVideoCard = ({
     : info?.snippet?.thumbnails?.high?.url;
 
   return (
-    <div className={`flex mx-2 my-8 cursor-pointer}`}>
-      <img
-        className={
-          (customThumbnail &&
-            "rounded-2xl w-[188px] object-contain line-clamp-3") ||
-          `hover:rounded-none rounded-xl hover:transition-all hover:duration-300 hover:ease-in hover:delay-150 ${
-            !isMenuOpen ? "w-[383px] h-[215px]" : "w-[325px] h-[183px]"
-          }`
-        }
-        src={imageUrl}
-        alt={customAlt || info?.snippet?.title}
-      />
-      <div className="m-1 pl-1 flex flex-col">
-        <span className="text-md font-semibold line-clamp-2 text-ellipsis">
-          {customTitle || info?.snippet?.title}
-        </span>
-        <span className="text-sm font-normal truncate">
+    <div className="flex flex-row w-11/12">
+      <div className="cursor-pointer m-1 p-1">
+        <Link
+          to={`/WatchPage?v=${info?.id?.videoId}`}
+          key={info?.id?.videoId}
+          onClick={() => dispatch(setVideoData(info))} //sending data to appSlice - videoData
+        >
+          <img
+            className={
+              (customThumbnail &&
+                "rounded-2xl w-[188px] object-contain line-clamp-3") ||
+              `hover:rounded-none rounded-xl hover:transition-all hover:duration-300 hover:ease-in hover:delay-150 w-[500px]`
+            }
+            src={imageUrl}
+            alt={customAlt || info?.snippet?.title}
+          />
+        </Link>
+      </div>
+      <div className="m-1 p-1 flex flex-col justify-start">
+        <span
+          className="text-lg py-1 font-medium line-clamp-2 text-ellipsis"
+          dangerouslySetInnerHTML={{
+            __html: customTitle || info?.snippet?.title,
+          }}
+        ></span>
+        {info?.snippet?.publishedAt && (
+          <>
+            <span className="text-xs font-light py-1">
+              {formatTimeAgo(info?.snippet?.publishedAt)}
+            </span>
+          </>
+        )}
+        <span className="text-sm font-normal truncate py-1">
           {customBio || info?.snippet?.channelTitle}
         </span>
         {customAlt && (
@@ -60,22 +82,13 @@ const ResultsVideoCard = ({
             </span>
           </>
         )}
-        {info?.snippet?.publishedAt && (
-          <>
-            <span className="text-sm font-light py-1">
-              {formatNumber(info?.statistics?.viewCount)}
-              {" views"}
-              &nbsp;•&nbsp;
-              {formatTimeAgo(info?.snippet?.publishedAt)}
-              {/* {formatNumber(info?.statistics?.likeCount)}
-              {" 👍🏻"} */}
-            </span>
-            {/* <span className="text-sm font-light">
-              {formatTimeAgo(info?.snippet?.publishedAt)}
-            </span> */}
-          </>
+        {info?.snippet?.description && (
+          <span className="text-xs truncate py-1 font-light">
+            {info?.snippet?.description}
+          </span>
         )}
       </div>
+      <CiMenuKebab />
     </div>
   );
 };
