@@ -3,7 +3,7 @@ import { yt_comments_link, REACT_APP_YTKEY } from "../utils/constants";
 import CommentStructure from "./CommentStructure";
 import { MdSend } from "react-icons/md";
 
-const CommentsFrame = ({ videoID }) => {
+const CommentsFrame = React.memo(({ videoID }) => {
   const [fetchedComments, setFetchedComments] = useState(null);
   const [formattedComments, setFormattedComments] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -74,7 +74,7 @@ const CommentsFrame = ({ videoID }) => {
     }
   };
 
-  // Handling input form submission
+  // Handling input form comments submission
   const submitMyComment = useCallback(
     (e) => {
       if (myComment) {
@@ -90,7 +90,7 @@ const CommentsFrame = ({ videoID }) => {
         setMyComment("");
       }
     },
-    [myComment]
+    [myComment, formattedComments]
   );
 
   console.log("Formatted", formattedComments);
@@ -108,6 +108,7 @@ const CommentsFrame = ({ videoID }) => {
           placeholder="Add a comment"
           className="h-[42px] w-full p-4 border-none outline-none focus:outline-none focus:border-none  dark:bg-black dark:border-neutral-800"
           onChange={(e) => setMyComment(e.target.value)}
+          value={myComment}
         />
         <div className="flex items-center justify-center border-none h-[42px] w-14 bg-gray-50 dark:bg-gray-950 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-xs">
           <button type="submit">
@@ -127,14 +128,6 @@ const CommentsFrame = ({ videoID }) => {
       </div>
     </div>
   );
-};
+});
 
 export default CommentsFrame;
-
-/*
-
-For every comment, if there is a reply => nested comment
-for nested comment, if there is a reply => another nested comment
-for another nested comment, if there is a reply => another another nested comment
-
-*/
