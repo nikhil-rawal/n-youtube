@@ -50,7 +50,6 @@ const VideoContainer = () => {
 
   const AdCard = HighVideoCard(VideoCard);
   const checkOpen = useSelector((state) => state.app.isMenuOpen);
-  console.log(allVideos);
 
   return (
     <div className={"flex flex-wrap m-2 p-2"}>

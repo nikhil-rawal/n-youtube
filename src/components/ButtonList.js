@@ -1,7 +1,5 @@
 import React from "react";
 import Button from "./Button";
-import { MdArrowBackIosNew } from "react-icons/md";
-import { MdArrowForwardIos } from "react-icons/md";
 
 const ButtonList = () => {
   return (

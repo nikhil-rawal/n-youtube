@@ -1,9 +1,7 @@
-import React, { useCallback, useState, useEffect, useMemo } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
+import { useLocation } from "react-router-dom";
 import ResultsVideoCard from "./ResultsVideoCard";
-import { setVideoData } from "../utils/appSlice";
 import { useDispatch, useSelector } from "react-redux";
-import VideoContainer from "./VideoContainer";
 import { openMenu, toggleVideoPageFalse } from "../utils/appSlice";
 import ButtonList from "./ButtonList";
 

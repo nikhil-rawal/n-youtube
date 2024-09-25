@@ -52,8 +52,6 @@ const LiveChatFrame = React.memo(() => {
     }
   }, [allChats]);
 
-  console.log(allChats);
-
   return (
     <div className="relative pt-8">
       <div
