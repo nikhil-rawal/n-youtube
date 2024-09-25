@@ -1,10 +1,8 @@
 import React from "react";
-import { formatNumber, formatTimeAgo } from "../utils/convertValues";
-import { useSelector } from "react-redux";
+import { formatTimeAgo } from "../utils/convertValues";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setVideoData } from "../utils/appSlice";
-import { CiMenuKebab } from "react-icons/ci";
 
 const ResultsVideoCard = ({
   info,
@@ -13,18 +11,11 @@ const ResultsVideoCard = ({
   customAlt,
   customBio,
 }) => {
-  const isMenuOpen = useSelector((state) => state.app.isMenuOpen);
-
   const changeImageURL = (currentImageURL) => {
     return (
       currentImageURL?.replaceAll("hqdefault", "maxresdefault") || undefined
     );
   };
-
-  // from here, results go to ResultsFrame, then repopulate
-  // same case with Comment, get results, send to CommentsFrame, then repopulate
-  // also change async methods for comments
-  // change styling
 
   const dispatch = useDispatch();
 

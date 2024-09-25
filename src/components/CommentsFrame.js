@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { yt_comments_link, REACT_APP_YTKEY } from "../utils/constants";
+import { REACT_APP_YTKEY } from "../utils/constants";
 import CommentStructure from "./CommentStructure";
 import { MdSend } from "react-icons/md";
 
@@ -60,7 +60,6 @@ const CommentsFrame = React.memo(({ videoID }) => {
       const response = await fetch(
         `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=20&order=relevance&videoId=${videoID}&key=${REACT_APP_YTKEY}`
       );
-      // later on add - &maxResults=100, order=time || order=elevance,
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -93,13 +92,11 @@ const CommentsFrame = React.memo(({ videoID }) => {
     [myComment, formattedComments]
   );
 
-  console.log("Formatted", formattedComments);
-
   return (
     <div className="flex flex-col">
       <div className="flex flex-row">
         <span className="font-semibold text-lg">
-          Top {fetchedComments?.pageInfo?.totalResults} Comments
+          Top {formattedComments?.length} Comments
         </span>
         {/* <button>--- Sort By ---</button> */}
       </div>
@@ -119,7 +116,9 @@ const CommentsFrame = React.memo(({ videoID }) => {
       <hr />
       <div className="flex flex-col">
         {errorMessage ? (
-          <div>{errorMessage}</div>
+          <div className="flex text-xl m-4 p-4 text-orange-400">
+            {errorMessage}
+          </div>
         ) : (
           formattedComments?.map((comment) => (
             <CommentStructure key={comment?.id} comment={comment} />

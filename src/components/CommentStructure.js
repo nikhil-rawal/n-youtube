@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdSend } from "react-icons/md";
 
@@ -7,14 +7,9 @@ const CommentStructure = React.memo(({ comment }) => {
   const [isReplied, setIsReplied] = useState(false);
   const [finalReply, setFinalReply] = useState({});
   const [myReply, setMyReply] = useState("");
-  const inputRef = useRef(null);
-
-  console.log(comment);
 
   const toggleReplyInput = () => {
-    inputRef.current.focus();
     setToggleReply(!toggleReply);
-    // showInputRef.current = !showInputRef.current;
   };
 
   // Handling input form reply submission
@@ -35,7 +30,7 @@ const CommentStructure = React.memo(({ comment }) => {
         setIsReplied(true);
       }
     },
-    [myReply, comment.id]
+    [myReply, comment.level]
   );
 
   return (
@@ -73,9 +68,8 @@ const CommentStructure = React.memo(({ comment }) => {
         {toggleReply && (
           <form onSubmit={submitMyReply} className="flex">
             <input
-              ref={inputRef}
               placeholder="Add a Reply"
-              className="h-[42px] w-full p-4 border-none outline-none focus:outline-none focus:border-none  dark:bg-black dark:border-neutral-800"
+              className="h-[42px] border-b-slate-100 border w-full p-4 outline outline-none  dark:bg-black dark:border-neutral-800"
               onChange={(e) => setMyReply(e.target.value)}
               value={myReply}
             />

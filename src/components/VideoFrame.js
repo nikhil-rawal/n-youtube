@@ -5,6 +5,7 @@ import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 
 const VideoFrame = ({ embedURL, videoData }) => {
+  console.log(videoData);
   return (
     <div className="">
       <iframe
