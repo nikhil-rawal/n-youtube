@@ -69,7 +69,6 @@ const CommentsFrame = ({ videoID }) => {
 
       const json = await response?.json();
       setFetchedComments(json);
-      console.log("json", json);
     } catch (error) {
       console.error("Failed to fetch comments:", error);
       setErrorMessage("Comments restricted on this video");
@@ -79,8 +78,8 @@ const CommentsFrame = ({ videoID }) => {
   return (
     <div className="flex flex-col">
       <div className="flex flex-row">
-        <span>{fetchedComments?.pageInfo?.totalResults} Comments</span>
-        <button>--- Sort By ---</button>
+        <span>Top {fetchedComments?.pageInfo?.totalResults} Comments</span>
+        {/* <button>--- Sort By ---</button> */}
       </div>
       <input placeholder="Add a comment" />
       <hr />

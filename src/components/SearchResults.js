@@ -36,23 +36,6 @@ const SearchResults = React.memo(() => {
       <div className="ml-5 overflow-x-scroll">
         <ButtonList />
       </div>
-      {/* {
-        <>
-          <a
-            href="https://github.com/nikhil-rawal"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <AdCard
-              key={userData?.id}
-              customTitle={userData?.name}
-              customThumbnail={userData?.avatar_url}
-              customAlt={userData?.login}
-              customBio={userData?.bio}
-            />
-          </a>
-        </>
-      } */}
       {searchResults?.items?.length > 1 &&
         searchResults?.items?.map((searchedVideoItem) => (
           <ResultsVideoCard

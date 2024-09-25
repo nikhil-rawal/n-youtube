@@ -1,5 +1,8 @@
 import React from "react";
 import { formatNumber } from "../utils/convertValues";
+import { GrView } from "react-icons/gr";
+import { AiOutlineLike } from "react-icons/ai";
+import { FaRegComment } from "react-icons/fa";
 
 const VideoFrame = ({ embedURL, videoData }) => {
   return (
@@ -17,20 +20,41 @@ const VideoFrame = ({ embedURL, videoData }) => {
       ></iframe>
       {videoData && (
         <div className="flex flex-col mx-2 my-4 max-w-4xl">
-          <span className="text-2xl font-semibold truncate">
+          <span className="text-xl font-semibold truncate content-center">
             {videoData?.snippet?.title}
           </span>
-          <div className="flex">
-            <span className="text-sm font-normal	">
+          <div className="flex flex-row justify-between">
+            <span className="text-sm font-semibold">
               {videoData?.snippet?.channelTitle}
             </span>
-            <span className="text-sm font-light">
-              {formatNumber(videoData?.statistics?.viewCount)}{" "}
-              views&nbsp;•&nbsp;
-              {formatNumber(videoData?.statistics?.commentCount)}{" "}
-              comments&nbsp;•&nbsp;
-              {formatNumber(videoData?.statistics?.likeCount)} likes
-            </span>
+            <div className="text-sm font-light flex flex-row">
+              <div className="flex flex-row px-2 bg-gray-200 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 rounded-xl cursor-pointer">
+                <button>
+                  <GrView className="size-4" />
+                </button>
+                <p className="text-[14px] ml-2">
+                  {formatNumber(videoData?.statistics?.viewCount)} views
+                </p>
+              </div>
+              &nbsp;•&nbsp;
+              <div className="flex flex-row px-2 bg-gray-200 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 rounded-xl cursor-pointer">
+                <button>
+                  <FaRegComment className="size-4" />
+                </button>
+                <p className="text-[14px] ml-2">
+                  {formatNumber(videoData?.statistics?.commentCount)} comments{" "}
+                </p>
+              </div>
+              &nbsp;•&nbsp;
+              <div className="flex flex-row px-2 bg-gray-200 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 rounded-xl cursor-pointer">
+                <button>
+                  <AiOutlineLike className="size-4" />
+                </button>
+                <p className="text-[14px] ml-2">
+                  {formatNumber(videoData?.statistics?.likeCount)} likes{" "}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       )}

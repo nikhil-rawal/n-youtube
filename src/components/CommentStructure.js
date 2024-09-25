@@ -1,9 +1,10 @@
 import React from "react";
+import { IoIosArrowDown } from "react-icons/io";
 
 const CommentStructure = ({ comment }) => {
   return (
     <div
-      className={`flex flex-col bg-slate-200 p-${comment?.level * 2 + 2} m-${
+      className={`flex flex-col p-${comment?.level * 2 + 2} m-${
         comment?.level * 2 + 2
       } rounded-sm }`}
     >
@@ -17,8 +18,8 @@ const CommentStructure = ({ comment }) => {
           alt={`Comment by ${comment?.authorName}`}
           className="w-10 h-10 rounded-full"
         />
-        <div className="flex flex-col px-1">
-          <span>{comment?.authorName}</span>
+        <div className="flex flex-col pl-4 px-1 text-sm">
+          <span className="font-semibold">{comment?.authorName}</span>
           <span
             dangerouslySetInnerHTML={{
               __html: comment?.authorComment,
@@ -28,6 +29,12 @@ const CommentStructure = ({ comment }) => {
       </div>
       {comment?.replies && comment?.replies?.length > 0 && (
         <div>
+          <br />
+          <div className="ml-10 flex flex-row bg-sky-500  hover:bg-sky-400 rounded-xl cursor-pointer p-1">
+            <IoIosArrowDown />
+            <span className="">{comment?.replies?.length} replies</span>
+          </div>
+          <br />
           {comment?.replies?.map((reply) => (
             <CommentStructure key={reply?.id} comment={reply} />
           ))}
