@@ -3,7 +3,6 @@ import { formatTimeAgo } from "../utils/convertValues";
 import { GrLike } from "react-icons/gr";
 
 const LiveChatStructure = ({ chat }) => {
-  console.log(chat);
   return (
     <>
       <div className="flex flex-row ml-4 pl-4 mr-1 pr-1">
@@ -37,15 +36,3 @@ const LiveChatStructure = ({ chat }) => {
 };
 
 export default LiveChatStructure;
-
-{
-  /* <br />
-      <br />
-      {chat?.replies &&
-        chat?.replies?.length > 0 &&
-        chat?.replies?.map((nestedChat) => (
-          <div>
-            <LiveChatStructure key={nestedChat?.id} chat={nestedChat} />
-          </div>
-        ))} */
-}
