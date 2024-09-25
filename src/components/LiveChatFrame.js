@@ -36,10 +36,12 @@ const LiveChatFrame = React.memo(() => {
   console.log(allChats);
 
   return (
-    <div className="flex flex-col">
-      {allChats?.map((chat) => (
-        <LiveChatStructure chat={chat} key={chat?.id} />
-      ))}
+    <div className="relative pt-8">
+      <div className="flex flex-col-reverse hover:bg-top bg-bottom overflow-y-scroll h-[500px]">
+        {allChats?.map((chat) => (
+          <LiveChatStructure chat={chat} key={chat?.id} />
+        ))}
+      </div>
       <div>
         <form onSubmit={submitMyChat} className="flex justify-end">
           <input

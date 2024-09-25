@@ -23,7 +23,7 @@ import { GiSportMedal } from "react-icons/gi";
 
 const SidebarOpen = () => {
   return (
-    <div className="flex flex-col hover:bg-top bg-bottom pl-[2px] z-10 sidebar-open w-52  overflow-y-scroll h-full pb-24 pt-2">
+    <div className="flex flex-col hover:bg-top bg-bottom pl-[2px] z-10 sidebar-open w-52 overflow-y-scroll h-full pb-24 pt-2">
       <div className="flex flex-col">
         <Link to="/">
           <div className="flex flex-row py-[12px] px-6 hover:bg-gray-200 dark:hover:bg-neutral-800 hover:rounded-xl cursor-pointer">
