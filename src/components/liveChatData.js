@@ -1,5 +1,6 @@
 export const liveChatData = [
   {
+    id: 1,
     username: "Alice",
     message: "Hey everyone! Excited for the new iPhone launch! 🎉",
     timestamp: "2024-09-25T12:00:00Z",
@@ -7,6 +8,7 @@ export const liveChatData = [
     likes: 5,
   },
   {
+    id: 2,
     username: "Bob",
     message: "Hello! Can't wait to see the new features. 😃",
     timestamp: "2024-09-25T12:01:15Z",
@@ -14,6 +16,7 @@ export const liveChatData = [
     likes: 3,
   },
   {
+    id: 3,
     username: "Charlie",
     message: "Hi from Tokyo! Loving the event!",
     timestamp: "2024-09-25T12:02:30Z",
@@ -21,6 +24,7 @@ export const liveChatData = [
     likes: 4,
   },
   {
+    id: 4,
     username: "Diana",
     message: "Question: Will the new iPhone have a better camera?",
     timestamp: "2024-09-25T12:03:45Z",
@@ -28,6 +32,7 @@ export const liveChatData = [
     likes: 2,
     replies: [
       {
+        id: 5,
         username: "Ethan",
         message: "Great question, Diana! I'm curious too.",
         timestamp: "2024-09-25T12:04:00Z",
@@ -37,6 +42,7 @@ export const liveChatData = [
     ],
   },
   {
+    id: 6,
     username: "Fiona",
     message: "Shoutout to all the new subscribers! 🙌",
     timestamp: "2024-09-25T12:05:30Z",
@@ -44,6 +50,7 @@ export const liveChatData = [
     likes: 6,
   },
   {
+    id: 7,
     username: "George",
     message: "This is my first live stream here. Hi everyone!",
     timestamp: "2024-09-25T12:06:45Z",
@@ -51,6 +58,7 @@ export const liveChatData = [
     likes: 2,
     replies: [
       {
+        id: 8,
         username: "Hannah",
         message: "Welcome, George! You're going to love it here.",
         timestamp: "2024-09-25T12:07:00Z",
@@ -60,6 +68,7 @@ export const liveChatData = [
     ],
   },
   {
+    id: 9,
     username: "Ian",
     message: "The design looks sleek! Can't wait to get my hands on it.",
     timestamp: "2024-09-25T12:08:15Z",
@@ -67,6 +76,7 @@ export const liveChatData = [
     likes: 5,
   },
   {
+    id: 10,
     username: "Julia",
     message: "Do you think the battery life will be improved?",
     timestamp: "2024-09-25T12:09:30Z",
@@ -74,6 +84,7 @@ export const liveChatData = [
     likes: 1,
   },
   {
+    id: 11,
     username: "Kevin",
     message: "I'm hoping for some new colors! 🎨",
     timestamp: "2024-09-25T12:10:45Z",
@@ -81,6 +92,7 @@ export const liveChatData = [
     likes: 4,
   },
   {
+    id: 12,
     username: "Laura",
     message: "The presentation is so well done! 👏",
     timestamp: "2024-09-25T12:12:00Z",
@@ -88,6 +100,7 @@ export const liveChatData = [
     likes: 3,
   },
   {
+    id: 13,
     username: "Mike",
     message: "Does anyone know the release date?",
     timestamp: "2024-09-25T12:13:15Z",
@@ -95,6 +108,7 @@ export const liveChatData = [
     likes: 2,
   },
   {
+    id: 14,
     username: "Nina",
     message: "I'm definitely pre-ordering as soon as it's available.",
     timestamp: "2024-09-25T12:14:30Z",
@@ -102,6 +116,7 @@ export const liveChatData = [
     likes: 4,
   },
   {
+    id: 15,
     username: "Oscar",
     message: "The new features are amazing! 😍",
     timestamp: "2024-09-25T12:15:45Z",
@@ -109,6 +124,7 @@ export const liveChatData = [
     likes: 5,
   },
   {
+    id: 16,
     username: "Paula",
     message: "I wonder how much it will cost.",
     timestamp: "2024-09-25T12:17:00Z",
@@ -116,6 +132,7 @@ export const liveChatData = [
     likes: 1,
   },
   {
+    id: 17,
     username: "Quinn",
     message: "The camera specs are impressive!",
     timestamp: "2024-09-25T12:18:15Z",
@@ -123,6 +140,7 @@ export const liveChatData = [
     likes: 3,
   },
   {
+    id: 18,
     username: "Rachel",
     message: "Can't wait to see the performance benchmarks.",
     timestamp: "2024-09-25T12:19:30Z",
@@ -130,6 +148,7 @@ export const liveChatData = [
     likes: 2,
   },
   {
+    id: 19,
     username: "Sam",
     message: "This is the best iPhone launch event yet!",
     timestamp: "2024-09-25T12:20:45Z",
@@ -137,6 +156,7 @@ export const liveChatData = [
     likes: 4,
   },
   {
+    id: 20,
     username: "Tina",
     message: "Thanks for the stream! Loving the updates. 😊",
     timestamp: "2024-09-25T12:22:00Z",
@@ -144,6 +164,7 @@ export const liveChatData = [
     likes: 3,
   },
   {
+    id: 21,
     username: "Moderator",
     message: "Please keep the chat respectful and on-topic. Thank you!",
     timestamp: "2024-09-25T12:23:00Z",

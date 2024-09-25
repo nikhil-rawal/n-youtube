@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { setVideoData } from "../utils/appSlice";
 import VideoFrame from "./VideoFrame";
 import CommentsFrame from "./CommentsFrame";
-import RecommendedFrame from "./RecommendedFrame";
+import LiveChatFrame from "./LiveChatFrame";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -35,12 +35,12 @@ const WatchPage = () => {
           : `grid grid-cols-12 brightness-50 blur-[1px] p-0 mx-0`
       }
     >
-      <div className="flex flex-col col-span-9">
+      <div className="flex flex-col col-span-8">
         <VideoFrame embedURL={embedURL} videoData={videoData} />
         <CommentsFrame videoID={videoId} />
       </div>
-      <div className="flex flex-col col-span-3">
-        <RecommendedFrame />
+      <div className="flex flex-col col-span-4">
+        <LiveChatFrame />
       </div>
     </div>
   );

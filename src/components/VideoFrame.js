@@ -8,7 +8,7 @@ const VideoFrame = ({ embedURL, videoData }) => {
   return (
     <div className="">
       <iframe
-        width="970"
+        width="950"
         height="540"
         src={embedURL}
         style={{ border: "none", borderRadius: "15px" }}
