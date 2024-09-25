@@ -23,12 +23,13 @@ const VideoFrame = ({ embedURL, videoData }) => {
           <span className="text-xl font-semibold truncate content-center">
             {videoData?.snippet?.title}
           </span>
+          <br />
           <div className="flex flex-row justify-between">
-            <span className="text-sm font-semibold">
+            <span className="text-lg font-semibold text-red-500 hover:text-red-400">
               {videoData?.snippet?.channelTitle}
             </span>
             <div className="text-sm font-light flex flex-row">
-              <div className="flex flex-row px-2 bg-gray-200 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 rounded-xl cursor-pointer">
+              <div className="flex flex-row px-4 bg-gray-200 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 rounded-xl cursor-pointer content-evenly justify-center items-center">
                 <button>
                   <GrView className="size-4" />
                 </button>
@@ -37,7 +38,7 @@ const VideoFrame = ({ embedURL, videoData }) => {
                 </p>
               </div>
               &nbsp;•&nbsp;
-              <div className="flex flex-row px-2 bg-gray-200 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 rounded-xl cursor-pointer">
+              <div className="flex flex-row px-4 bg-gray-200 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 rounded-xl cursor-pointer content-evenly justify-center items-center">
                 <button>
                   <FaRegComment className="size-4" />
                 </button>
@@ -46,7 +47,7 @@ const VideoFrame = ({ embedURL, videoData }) => {
                 </p>
               </div>
               &nbsp;•&nbsp;
-              <div className="flex flex-row px-2 bg-gray-200 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 rounded-xl cursor-pointer">
+              <div className="flex flex-row px-4 bg-gray-200 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 rounded-xl cursor-pointer content-evenly justify-center items-center">
                 <button>
                   <AiOutlineLike className="size-4" />
                 </button>

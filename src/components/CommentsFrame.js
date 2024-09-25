@@ -1,15 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { yt_comments_link, REACT_APP_YTKEY } from "../utils/constants";
 import CommentStructure from "./CommentStructure";
+import { MdSend } from "react-icons/md";
 
 const CommentsFrame = ({ videoID }) => {
   const [fetchedComments, setFetchedComments] = useState(null);
   const [formattedComments, setFormattedComments] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [myComment, setMyComment] = useState("");
-
-  console.log("Fetched", fetchedComments);
-  console.log("Formatted", formattedComments);
 
   useEffect(() => {
     getAllComments();
@@ -77,27 +75,45 @@ const CommentsFrame = ({ videoID }) => {
   };
 
   // Handling input form submission
-  const submitComment = useCallback(
+  const submitMyComment = useCallback(
     (e) => {
       if (myComment) {
         e.preventDefault();
+        formattedComments.unshift({
+          authorComment: myComment,
+          authorImage:
+            "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+          authorName: "You",
+          id: Math.floor(Math.random() * 1000000),
+          level: 0,
+        });
+        setMyComment("");
       }
     },
     [myComment]
   );
 
+  console.log("Formatted", formattedComments);
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-row">
-        <span>Top {fetchedComments?.pageInfo?.totalResults} Comments</span>
+        <span className="font-semibold text-lg">
+          Top {fetchedComments?.pageInfo?.totalResults} Comments
+        </span>
         {/* <button>--- Sort By ---</button> */}
       </div>
-      <form onSubmit={submitComment}>
+      <form onSubmit={submitMyComment} className="flex">
         <input
           placeholder="Add a comment"
-          className="h-[42px] p-4  border-none outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-black dark:border-neutral-800"
+          className="h-[42px] w-full p-4 border-none outline-none focus:outline-none focus:border-none  dark:bg-black dark:border-neutral-800"
           onChange={(e) => setMyComment(e.target.value)}
         />
+        <div className="flex items-center justify-center border-none h-[42px] w-14 bg-gray-50 dark:bg-gray-950 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-xs">
+          <button type="submit">
+            <MdSend className="size-6" />
+          </button>
+        </div>
       </form>
       <hr />
       <div className="flex flex-col">

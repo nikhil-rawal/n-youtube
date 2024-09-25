@@ -32,8 +32,9 @@ const CommentStructure = ({ comment }) => {
           <br />
           <div className=" ml-10 absolute items-center flex bg-sky-500 hover:bg-sky-400 rounded-xl cursor-pointer p-1">
             <IoIosArrowDown />
-            <span className="">{comment?.replies?.length} replies</span>
+            <span>{comment?.replies?.length} replies</span>
           </div>
+          <br />
           <br />
           {comment?.replies?.map((reply) => (
             <CommentStructure key={reply?.id} comment={reply} />
