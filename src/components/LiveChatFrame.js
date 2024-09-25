@@ -1,11 +1,13 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { liveChatData } from "./liveChatData";
 import LiveChatStructure from "./LiveChatStructure";
 import { MdSend } from "react-icons/md";
 
 const LiveChatFrame = React.memo(() => {
-  const [allChats, setAllChats] = useState(liveChatData);
+  const [allChats, setAllChats] = useState([]);
   const [myChat, setMyChat] = useState("");
+  const [chatIndex, setChatIndex] = useState(0);
+  const chatContainerRef = useRef(null);
 
   function formatCurrentDate(timestamp) {
     return new Date(timestamp).toISOString().slice(0, -5) + "Z";
@@ -33,11 +35,31 @@ const LiveChatFrame = React.memo(() => {
     [myChat]
   );
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (chatIndex < liveChatData?.length) {
+        setAllChats((prevChats) => [...prevChats, liveChatData[chatIndex]]);
+        setChatIndex((prevIndex) => prevIndex + 1);
+      }
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [chatIndex]);
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  }, [allChats]);
+
   console.log(allChats);
 
   return (
     <div className="relative pt-8">
-      <div className="flex flex-col-reverse hover:bg-top bg-bottom overflow-y-scroll h-[500px]">
+      <div
+        className="flex flex-col-reverse hover:bg-top bg-bottom overflow-y-scroll h-[500px]"
+        ref={chatContainerRef}
+      >
         {allChats?.map((chat) => (
           <LiveChatStructure chat={chat} key={chat?.id} />
         ))}

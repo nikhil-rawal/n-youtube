@@ -40,6 +40,9 @@ const WatchPage = () => {
         <CommentsFrame videoID={videoId} />
       </div>
       <div className="flex flex-col col-span-4">
+        <span className="text-xl mx-auto  text-rose-600  dark:bg-white rounded-sm px-2 font-medium">
+          Dummy Youtube Chat
+        </span>
         <LiveChatFrame />
       </div>
     </div>
