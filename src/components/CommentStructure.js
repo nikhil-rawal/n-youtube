@@ -30,7 +30,7 @@ const CommentStructure = ({ comment }) => {
       {comment?.replies && comment?.replies?.length > 0 && (
         <div>
           <br />
-          <div className="ml-10 flex flex-row bg-sky-500  hover:bg-sky-400 rounded-xl cursor-pointer p-1">
+          <div className=" ml-10 absolute items-center flex bg-sky-500 hover:bg-sky-400 rounded-xl cursor-pointer p-1">
             <IoIosArrowDown />
             <span className="">{comment?.replies?.length} replies</span>
           </div>

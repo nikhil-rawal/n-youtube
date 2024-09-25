@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { yt_comments_link, REACT_APP_YTKEY } from "../utils/constants";
 import CommentStructure from "./CommentStructure";
 
@@ -6,6 +6,7 @@ const CommentsFrame = ({ videoID }) => {
   const [fetchedComments, setFetchedComments] = useState(null);
   const [formattedComments, setFormattedComments] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [myComment, setMyComment] = useState("");
 
   console.log("Fetched", fetchedComments);
   console.log("Formatted", formattedComments);
@@ -75,13 +76,29 @@ const CommentsFrame = ({ videoID }) => {
     }
   };
 
+  // Handling input form submission
+  const submitComment = useCallback(
+    (e) => {
+      if (myComment) {
+        e.preventDefault();
+      }
+    },
+    [myComment]
+  );
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-row">
         <span>Top {fetchedComments?.pageInfo?.totalResults} Comments</span>
         {/* <button>--- Sort By ---</button> */}
       </div>
-      <input placeholder="Add a comment" />
+      <form onSubmit={submitComment}>
+        <input
+          placeholder="Add a comment"
+          className="h-[42px] p-4  border-none outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-black dark:border-neutral-800"
+          onChange={(e) => setMyComment(e.target.value)}
+        />
+      </form>
       <hr />
       <div className="flex flex-col">
         {errorMessage ? (
