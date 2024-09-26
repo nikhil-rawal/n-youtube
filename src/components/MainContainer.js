@@ -15,7 +15,7 @@ const MainContainer = () => {
 
   return (
     <div className={!isMenuOpen ? `ml-44` : undefined}>
-      <div className="ml-5 overflow-x-auto whitespace-nowrap relative">
+      <div className="ml-5 whitespace-nowrap overflow-x-hidden">
         <ButtonList />
       </div>
       <VideoContainer />

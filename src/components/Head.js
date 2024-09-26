@@ -167,27 +167,10 @@ const Head = () => {
     }
   };
 
-  // Handling click on li suggestions
-  // function handleSuggestionClick(suggestion, index) {
-  //   setInputValue(suggestion);
-  //   setSearchQuery(inputValue);
-  //   setSearchSuggestions([]);
-  // }
-
   //HandleSuggestion onMouseOver
   const handleSuggestionOver = useCallback((suggestion) => {
     setInputValue(suggestion);
   }, []);
-
-  // useEffect(() => {
-  //   console.log("inputValue", inputValue);
-  // }, [inputValue]);
-  // useEffect(() => {
-  //   console.log("searchQuery", searchQuery);
-  // }, [searchQuery]);
-  // useEffect(() => {
-  //   console.log("searchSuggestions", searchSuggestions);
-  // }, [searchSuggestions]);
 
   return (
     <div className="flex flex-col fixed top-0 left-0 right-0 bg-white dark:bg-black p-2 px-6">
@@ -262,23 +245,12 @@ const Head = () => {
                       key={`${index}-${suggestion}-${index}`}
                       role="option"
                       aria-selected={index === selectedSuggestionIndex}
-                      // onClick={() => console.log(suggestion, index)}
-                      // onClick={() => handleSuggestionClick(suggestion, index)}
-                      // onClick={() => setSearchQuery(suggestion)}
-
                       onMouseOver={() =>
                         handleSuggestionOver(suggestion, index)
                       }
                     >
-                      {/* <button
-                        className="flex"
-                        // onClick={() => console.log(suggestion, index)}
-                        // onClick={() => console.log(suggestion, index)}
-                        onClick={() => handleSuggestionClick(suggestion, index)}
-                      > */}
                       <CiSearch className="size-5 mr-2" />
                       {suggestion}
-                      {/* </button> */}
                     </li>
                   ))}
                 </ul>

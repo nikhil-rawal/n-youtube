@@ -58,7 +58,7 @@ const CommentsFrame = React.memo(({ videoID }) => {
   const getAllComments = async () => {
     try {
       const response = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=20&order=relevance&videoId=${videoID}&key=${REACT_APP_YTKEY}`
+        `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&order=relevance&videoId=${videoID}&key=${REACT_APP_YTKEY}`
       );
 
       if (!response.ok) {

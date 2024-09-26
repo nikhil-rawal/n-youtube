@@ -56,12 +56,7 @@ const VideoCard = ({
               {" views"}
               &nbsp;•&nbsp;
               {formatTimeAgo(info?.snippet?.publishedAt)}
-              {/* {formatNumber(info?.statistics?.likeCount)}
-              {" 👍🏻"} */}
             </span>
-            {/* <span className="text-sm font-light">
-              {formatTimeAgo(info?.snippet?.publishedAt)}
-            </span> */}
           </>
         )}
       </div>
