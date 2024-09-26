@@ -2,6 +2,8 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
 
+// for sm, md, lg, xl, 2xl
+
 const Body = () => {
   return (
     <div className="flex mt-16 body">
