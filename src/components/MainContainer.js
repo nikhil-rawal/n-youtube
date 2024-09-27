@@ -11,7 +11,7 @@ const MainContainer = () => {
   useEffect(() => {
     dispatch(openMenu());
     dispatch(toggleVideoPageFalse());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={!isMenuOpen ? `ml-44` : undefined}>

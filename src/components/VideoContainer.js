@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { yt_api_link, github_api_link } from "../utils/constants";
 import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setVideoData } from "../utils/appSlice";
 
 const VideoContainer = () => {

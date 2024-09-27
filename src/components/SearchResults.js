@@ -10,7 +10,7 @@ import ButtonList from "./ButtonList";
 const SearchResults = React.memo(() => {
   const [searchResults, setSearchResults] = useState([]);
   const location = useLocation();
-  const { query, results } = location.state || {};
+  const { results } = location.state || {};
   const parsedResults = useMemo(() => {
     return results ? JSON.parse(results) : null;
   }, [results]);
