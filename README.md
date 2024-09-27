@@ -1,6 +1,6 @@
 # n-youtube
 
-n-youtube is a ReactJS-based web application that aims to clone the core functionalities of YouTube. This project is optimized for large screen devices like laptops and desktops. Inspired by Akshay Saini, this project has been built with a unique approach.
+n-youtube is a ReactJS-based web application that aims to clone the core functionalities of YouTube. This project is optimized for large screen devices like laptops and desktops and will be optimized for small screens in future.
 
 ## Overview
 
