@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# n-youtube
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+n-youtube is a ReactJS-based web application that aims to clone the core functionalities of YouTube. This project is optimized for large screen devices like laptops and desktops. Inspired by Akshay Saini, this project has been built with a unique approach.
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+- **Framework**: ReactJS
+- **State Management**: Redux
+- **Styling**: Tailwind CSS
+- **Icons**: react-icons
+- **Hosting**: Netlify
+- **API**: YouTube Public API
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Top Videos**: On page load, the YouTube API fetches the top 50 videos in Canada. The country can be changed to others like India, USA, etc.
+2. **GitHub Profile Link**: The first thumbnail contains a link to my GitHub profile as a higher-order component, followed by YouTube's top videos.
+3. **Day/Night Mode**: Implemented using Redux. It adapts to system preferences but can be overridden with a single click.
+4. **Search Bar**: Includes debouncing with a 300ms delay to ensure fast performance. 
+   - **Debouncing**: A technique to limit the rate at which a function executes. For example, in a search bar, debouncing ensures that the search function is called only after the user has stopped typing for a specified time (300ms in this case).
+5. **Search Suggestions**: Displays search suggestions as a list. Hovering over suggestions shows more related suggestions. Only 10 suggestions are shown at a time, and navigation through suggestions is possible using arrow keys.
+6. **Search Results**: On submitting the search query or pressing enter, the YouTube search API fetches the top 50 results.
+7. **Watch Page**: Clicking on a thumbnail navigates to `WatchPage.js`, where detailed video information and top 50 comments are displayed. Infinite nested comments are supported, and users can reply to comments.
+8. **Live Chat**: A dummy live chat feature on the right side of `WatchPage.js` simulates YouTube's live chat, with messages popping up every 3000ms. Users can also type their messages.
