@@ -1,4 +1,4 @@
-# n-youtube
+# **[n-youtube](https://n-youtube.netlify.app)**
 
 n-youtube is a ReactJS-based web application that aims to clone the core functionalities of YouTube. This project is optimized for large screen devices like laptops and desktops and will be optimized for small screens in future.
 
