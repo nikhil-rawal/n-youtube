@@ -10,7 +10,7 @@ import ButtonList from "./ButtonList";
 const SearchResults = React.memo(() => {
   const [searchResults, setSearchResults] = useState([]);
   const location = useLocation();
-  const { results } = location.state || {};
+  const { query, results } = location.state || {};
   const parsedResults = useMemo(() => {
     return results ? JSON.parse(results) : null;
   }, [results]);
@@ -28,7 +28,7 @@ const SearchResults = React.memo(() => {
     dispatch(toggleVideoPageFalse());
   }, [dispatch]);
 
-  console.log(searchResults?.items);
+  console.log(query);
   return (
     <div className={!isMenuOpen ? `ml-44` : `ml-12`}>
       <div className="ml-5 overflow-x-scroll">
