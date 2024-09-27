@@ -10,11 +10,6 @@ const CommentsFrame = React.memo(({ videoID }) => {
   const [myComment, setMyComment] = useState("");
 
   useEffect(() => {
-    getAllComments();
-    // eslint-disable-next-line no-use-before-define
-  }, [getAllComments]);
-
-  useEffect(() => {
     const formatComments = (fetchedComments, level = 0) => {
       if (fetchedComments?.items !== undefined) {
         return fetchedComments?.items?.map((comment) => ({
@@ -76,6 +71,7 @@ const CommentsFrame = React.memo(({ videoID }) => {
 
   useEffect(() => {
     getAllComments();
+    // eslint-disable-next-line no-use-before-define
   }, [getAllComments]);
 
   // Handling input form comments submission
