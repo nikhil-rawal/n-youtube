@@ -11,7 +11,8 @@ const CommentsFrame = React.memo(({ videoID }) => {
 
   useEffect(() => {
     getAllComments();
-  }, []);
+    // eslint-disable-next-line no-use-before-define
+  }, [getAllComments]);
 
   useEffect(() => {
     const formatComments = (fetchedComments, level = 0) => {
@@ -55,7 +56,7 @@ const CommentsFrame = React.memo(({ videoID }) => {
     setFormattedComments(formatComments(fetchedComments));
   }, [fetchedComments]);
 
-  const getAllComments = async () => {
+  const getAllComments = useCallback(async () => {
     try {
       const response = await fetch(
         `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&order=relevance&videoId=${videoID}&key=${REACT_APP_YTKEY}`
@@ -71,7 +72,11 @@ const CommentsFrame = React.memo(({ videoID }) => {
       console.error("Failed to fetch comments:", error);
       setErrorMessage("Comments restricted on this video");
     }
-  };
+  }, [videoID]);
+
+  useEffect(() => {
+    getAllComments();
+  }, [getAllComments]);
 
   // Handling input form comments submission
   const submitMyComment = useCallback(

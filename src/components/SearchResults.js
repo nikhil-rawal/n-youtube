@@ -26,7 +26,7 @@ const SearchResults = React.memo(() => {
   useEffect(() => {
     dispatch(openMenu());
     dispatch(toggleVideoPageFalse());
-  }, []);
+  }, [dispatch]);
 
   console.log(searchResults?.items);
   return (

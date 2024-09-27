@@ -8,9 +8,9 @@ const CommentStructure = React.memo(({ comment }) => {
   const [finalReply, setFinalReply] = useState({});
   const [myReply, setMyReply] = useState("");
 
-  const toggleReplyInput = () => {
+  const toggleReplyInput = useCallback(() => {
     setToggleReply(!toggleReply);
-  };
+  }, [toggleReply]);
 
   // Handling input form reply submission
   const submitMyReply = useCallback(
@@ -30,7 +30,7 @@ const CommentStructure = React.memo(({ comment }) => {
         setIsReplied(true);
       }
     },
-    [myReply, comment.level]
+    [myReply, comment.level, toggleReplyInput]
   );
 
   return (
