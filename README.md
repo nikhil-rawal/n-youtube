@@ -22,3 +22,5 @@ n-youtube is a ReactJS-based web application that aims to clone the core functio
 6. **Search Results**: On submitting the search query or pressing enter, the YouTube search API fetches the top 50 results.
 7. **Watch Page**: Clicking on a thumbnail navigates to `WatchPage.js`, where detailed video information and top 50 comments are displayed. Infinite nested comments are supported, and users can reply to comments.
 8. **Live Chat**: A dummy live chat feature on the right side of `WatchPage.js` simulates YouTube's live chat, with messages popping up every 3000ms. Users can also type their messages.
+
+**API key public on purpose**
