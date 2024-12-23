@@ -24,3 +24,11 @@ n-youtube is a ReactJS-based web application that aims to clone the core functio
 8. **Live Chat**: A dummy live chat feature on the right side of `WatchPage.js` simulates YouTube's live chat, with messages popping up every 3000ms. Users can also type their messages.
 
 **API key public on purpose**
+
+---
+
+- 👨🏻‍💻 Take a glance at **[My Portfolio - nikhilrawal.ca](https://nikhilrawal.ca)**
+
+This is my personal portfolio website, built using **React.js** and styled with **TailwindCSS**. It showcases my projects and includes features such as light/dark mode toggling, responsive design, and more.
+
+---
